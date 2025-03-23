@@ -2,9 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "#app": ["app.js"],
       "#config/*": ["config/*"],
       "#middlewares/*": ["middlewares/*"],
       "#routes/*": ["routes/*"],
+      "#scheduler/*": ["scheduler/*"],
       "#services/*": ["services/*"],
       "#utils/*": ["utils/*"]
     }

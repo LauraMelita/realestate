@@ -8,6 +8,3 @@ dist/
 
 # IDE and Editor Configurations
 .vscode
-
-# Prettier and Linter Cache
-.prettierrc.json
