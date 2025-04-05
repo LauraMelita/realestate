@@ -3,10 +3,13 @@
     "baseUrl": "./src",
     "paths": {
       "#app": ["app.js"],
+      "#scheduler": ["scheduler.js"],
       "#config/*": ["config/*"],
+      "#controllers/*": ["controllers/*"],
       "#middlewares/*": ["middlewares/*"],
+      "#models/*": ["models/*"],
       "#routes/*": ["routes/*"],
-      "#scheduler/*": ["scheduler/*"],
+      "#scrapers/*": ["scrapers/*"],
       "#services/*": ["services/*"],
       "#utils/*": ["utils/*"]
     }
