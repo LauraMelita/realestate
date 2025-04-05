@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import connectDB from '#config/db';
-import scheduler from '#scheduler/index';
+import scheduler from '#scheduler';
 import app from '#app';
 
 const PORT = process.env.PORT || 5000;

@@ -10,10 +10,13 @@
   },
   "imports": {
     "#app": "./src/app.js",
+    "#scheduler": "./src/scheduler.js",
     "#config/*": "./src/config/*.js",
+    "#controllers/*": "./src/controllers/*.js",
     "#middlewares/*": "./src/middlewares/*.js",
+    "#models/*": "./src/models/*.js",
     "#routes/*": "./src/routes/*.js",
-    "#scheduler/*": "./src/scheduler/*.js",
+    "#scrapers/*": "./src/scrapers/*.js",
     "#services/*": "./src/services/*.js",
     "#utils/*": "./src/utils/*.js"
   },
@@ -26,6 +29,7 @@
     "axios": "^1.8.4",
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-mongo-sanitize": "^2.2.0",
@@ -38,7 +42,8 @@
     "node-cron": "^3.0.3",
     "node-telegram-bot-api": "^0.66.0",
     "puppeteer": "^24.4.0",
-    "user-agents": "^1.1.486"
+    "user-agents": "^1.1.493",
+    "validator": "^13.15.0"
   },
   "devDependencies": {
     "eslint": "^9.23.0",
