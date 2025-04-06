@@ -4,10 +4,14 @@ const formatPrice = (price) => {
   return +price.split('\n')[0].replace(/[^\d]/g, '');
 };
 
-const formatSurface = (surface) => {
-  const match = surface.match(/(\d+)\s*m²/);
+const formatDetails = (details) => {
+  const bedroomsMatch = details.match(/(?:-|\b)?\s*(\d+)\s*bdr/i);
+  const surfaceMatch = details.match(/(\d+)\s*m²/);
 
-  return +match[1];
+  return {
+    bedrooms: bedroomsMatch ? +bedroomsMatch[1] : null,
+    surface: surfaceMatch ? +surfaceMatch[1] : null,
+  };
 };
 
 const formatLocality = (locality) => {
@@ -25,20 +29,24 @@ const formatLocality = (locality) => {
 };
 
 export const formatData = (rawData) =>
-  rawData.map(({ url, price, surface, locality }) => {
+  rawData.map(({ image, price, locality, details, url }) => {
     const { postalCode, city } = formatLocality(locality);
+    const { bedrooms, surface } = formatDetails(details);
     const formattedPrice = formatPrice(price);
-    const formattedSurface = formatSurface(surface);
+    const type = url?.split('/')[5];
     const agency = 'immoweb';
-    const hashString = `${formattedPrice}-${formattedSurface}-${agency}-${postalCode}-${city}`;
+    const hashString = `${agency}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
 
     return {
       hash: generateHash(hashString),
       agency,
+      type,
+      image,
       price: formattedPrice,
-      postalCode,
+      zip: postalCode,
       city,
-      surface: formattedSurface,
+      surface,
+      bedrooms,
       url,
     };
   });
