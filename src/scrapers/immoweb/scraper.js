@@ -5,11 +5,12 @@ import { usePuppeteer } from '#utils/scraper';
 
 const PAGE_SELECTORS = {
   searchResults: 'ul.search-results__list li.search-results__item',
+  nextPage: 'li.pagination__item:last-child a.pagination__link--next',
   link: 'a.card__title-link',
+  details: '.card__information--property',
   price: 'p.card--result__price',
   locality: '.card__information.card--results__information--locality',
-  surface: '.card__information--property',
-  nextPage: 'li.pagination__item:last-child a.pagination__link--next',
+  image: '.card__media-picture',
 };
 
 const extractPageData = async (page) => {
@@ -21,9 +22,10 @@ const extractPageData = async (page) => {
       items.map((item) => {
         const url = item.querySelector(selectors.link)?.href;
         const price = item.querySelector(selectors.price)?.innerText;
+        const details = item.querySelector(selectors.details)?.innerText;
         const locality = item.querySelector(selectors.locality)?.innerText;
-        const surface = item.querySelector(selectors.surface)?.innerText;
-        return { url, price, surface, locality };
+        const image = item.querySelector(selectors.image)?.src;
+        return { url, price, details, locality, image };
       }),
     PAGE_SELECTORS,
   );
@@ -36,11 +38,11 @@ const extractPageData = async (page) => {
 export const scrapeImmoweb = async () => {
   const allData = [];
 
-  for (const { type, searchURL } of endpoints) {
-    console.log(`Scraping apartments with ${type} from ${searchURL}`);
+  for (const { type, url } of endpoints) {
+    console.log(`Scraping properties with ${type} from ${url}`);
 
     const data = await usePuppeteer(
-      searchURL,
+      url,
       PAGE_SELECTORS.nextPage,
       extractPageData,
     );

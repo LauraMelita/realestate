@@ -26,3 +26,7 @@ export const filterEmpty = (arr) =>
 
 export const deduplicateByKey = (arr, key) =>
   Array.from(new Map(arr.map((item) => [item[key], item])).values());
+
+export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const formatPrice = (price) => `€${price.toLocaleString('en-US')}`;
