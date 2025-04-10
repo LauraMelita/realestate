@@ -3,6 +3,7 @@ import 'dotenv/config';
 import connectDB from '#config/db';
 import scheduler from '#scheduler';
 import app from '#app';
+import { logError } from '#services/logger';
 
 const PORT = process.env.PORT || 5000;
 
@@ -14,7 +15,7 @@ const startServer = async () => {
       console.log(`App running on port ${PORT}...`);
     });
   } catch (error) {
-    console.error('Failed to start the server', error);
+    logError('Failed to start the server', error);
     process.exit(1);
   }
 };

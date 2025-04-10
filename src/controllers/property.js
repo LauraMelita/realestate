@@ -1,4 +1,5 @@
 import Property from '#models/property';
+import { logSaved, logError } from '#services/logger';
 
 export const getAllProperties = async (req, res, next) => {
   try {
@@ -14,7 +15,7 @@ export const getAllProperties = async (req, res, next) => {
   }
 };
 
-export const saveNewProperties = async (properties) => {
+export const saveNewProperties = async (properties, agency) => {
   if (!properties.length) return [];
 
   // Get all hashes
@@ -33,17 +34,17 @@ export const saveNewProperties = async (properties) => {
   );
 
   if (!newProperties.length) {
-    console.log('No new properties found.');
+    logSaved(agency);
     return [];
   }
 
   // Insert new properties
   try {
     await Property.insertMany(newProperties);
-    console.log(`${newProperties.length} new properties saved.`);
+    logSaved(agency, newProperties.length);
     return newProperties;
   } catch (error) {
-    console.error('Error saving new properties:', error.message);
+    logError('Error saving new properties:', error.message);
     return [];
   }
 };

@@ -1,4 +1,4 @@
-import { scrapeImmoweb, scrapeLatourEtPetit } from '#scrapers/index';
+import { scrapeImmoweb, scrapeEra, scrapeLatourEtPetit } from '#scrapers/index';
 
 const AGENCIES = [
   {
@@ -19,12 +19,12 @@ const AGENCIES = [
   //   frequency: '*/40 6-23 * * *', // Every 40 minutes from 06:00 to 23:59
   //   hasLinkPreview: null,
   // },
-  // {
-  //   name: 'era',
-  //   method: null,
-  //   frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
+  {
+    name: 'era',
+    method: scrapeEra,
+    frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
+    hasLinkPreview: true,
+  },
   // {
   //   name: 'expertissimo',
   //   method: null,
