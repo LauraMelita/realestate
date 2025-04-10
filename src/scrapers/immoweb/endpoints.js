@@ -4,7 +4,7 @@ import { buildSearchUrl } from '#utils/helpers';
 const { category, locations, maxPrice, minSurface, minRooms, features } =
   SEARCH_PARAMS;
 
-const BASE_URL = `https://www.immoweb.be/en/search/${category.name}/for-sale?countries=BE`;
+const BASE_URL = `https://www.immoweb.be/en/search/${category}/for-sale?countries=BE`;
 
 const BASE_PARAMS = {
   postalCodes: locations.map(({ postalCode }) => postalCode),

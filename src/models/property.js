@@ -13,13 +13,16 @@ const propertySchema = new Schema(
       type: String,
       required: [true, 'A property must have an agency'],
       enum: {
-        values: ['immoweb', 'Latour & Petit'],
+        values: ['immoweb', 'Era', 'Latour & Petit'],
       },
     },
 
     type: {
       type: String,
       required: [true, 'A property must have a type'],
+      enum: {
+        values: ['apartment', 'house'],
+      },
     },
 
     image: {
@@ -33,7 +36,7 @@ const propertySchema = new Schema(
 
     price: {
       type: Number,
-      required: [true, 'A property must have a price'],
+      default: null,
     },
 
     zip: {
@@ -70,7 +73,7 @@ const propertySchema = new Schema(
   // Schema Options
   {
     versionKey: false,
-    timestamps: { createdAt: true, updatedAt: false },
+    timestamps: { createdAt: 'scrapedAt', updatedAt: false },
     toJSON: {
       transform(doc, ret) {
         delete ret._id;

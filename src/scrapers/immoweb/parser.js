@@ -28,12 +28,29 @@ const formatLocality = (locality) => {
   };
 };
 
+const getCategoryFromURL = (url) => {
+  const categorySegment = url.split('/')[5];
+
+  switch (categorySegment) {
+    case 'ground-floor':
+      return 'apartment';
+    case 'loft':
+      return 'apartment';
+    case 'penthouse':
+      return 'apartment';
+    case 'new-real-estate-project-apartments':
+      return 'apartment';
+    default:
+      return categorySegment;
+  }
+};
+
 export const formatData = (rawData) =>
   rawData.map(({ image, price, locality, details, url }) => {
     const { postalCode, city } = formatLocality(locality);
     const { bedrooms, surface } = formatDetails(details);
     const formattedPrice = formatPrice(price);
-    const type = url?.split('/')[5];
+    const type = getCategoryFromURL(url);
     const agency = 'immoweb';
     const hashString = `${agency}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
 

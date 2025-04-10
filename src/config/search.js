@@ -1,10 +1,10 @@
 const SEARCH_PARAMS = {
-  category: { code: '2', name: 'apartment' },
+  category: 'apartment',
   locations: [
-    { postalCode: '1083', city: 'Ganshoren' },
-    { postalCode: '1081', city: 'Koekelberg' },
-    { postalCode: '1090', city: 'Jette' },
-    { postalCode: '1082', city: 'Berchem-Sainte-Agathe' },
+    { postalCode: '1083', city: 'Ganshoren', eraId: '2879' },
+    { postalCode: '1081', city: 'Koekelberg', eraId: '2881' },
+    { postalCode: '1090', city: 'Jette', eraId: '2880' },
+    { postalCode: '1082', city: 'Berchem-Sainte-Agathe', eraId: '2883' },
   ],
   maxPrice: '350000',
   minRooms: '1',

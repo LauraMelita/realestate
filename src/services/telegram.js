@@ -1,6 +1,7 @@
 import bot from '#config/bot';
 
 import { formatPrice } from '#utils/helpers';
+import { logError } from '#services/logger';
 
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
@@ -41,6 +42,6 @@ export const sendNotification = async (data, hasLinkPreview) => {
       }
     }
   } catch (error) {
-    console.error('Failed to send Telegram message:', error.message);
+    logError('Failed to send Telegram message:', error.message);
   }
 };
