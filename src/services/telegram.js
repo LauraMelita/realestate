@@ -1,12 +1,12 @@
 import bot from '#config/bot';
 
-import { formatPrice } from '#utils/helpers';
+import { formatPrice, capitalize } from '#utils/helpers';
 import { logError } from '#services/logger';
 
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-const sendLinkPreview = async ({ url, type }) => {
-  const message = `<a href="${url}">New ${type}</a>`;
+const sendLinkPreview = async ({ url, type, agency }) => {
+  const message = `<a href="${url}">${capitalize(type)} — ${agency}</a>`;
 
   await bot.sendMessage(CHAT_ID, message, {
     parse_mode: 'HTML',
@@ -24,7 +24,7 @@ const sendPhotoPreview = async ({
   price,
   image,
 }) => {
-  const caption = `<a href="${url}">New ${type} — ${agency} — ${city} (${zip}) — ${surface}m² — ${bedrooms} bedrooms — ${formatPrice(price)}</a>`;
+  const caption = `<a href="${url}">${capitalize(type)} — ${agency}</a>\n${city} (${zip})\n${surface}m² · ${bedrooms} bdr. · ${formatPrice(price)}`;
 
   await bot.sendPhoto(CHAT_ID, image, {
     caption,
