@@ -3,6 +3,7 @@ import {
   scrapeEra,
   scrapeImmoweb,
   scrapeLatourEtPetit,
+  scrapeRealo,
 } from '#scrapers/index';
 
 const AGENCIES = [
@@ -72,12 +73,12 @@ const AGENCIES = [
   //   frequency: '*/29 6-23 * * *', // Every 29 minutes from 06:00 to 23:59
   //   hasLinkPreview: null,
   // },
-  // {
-  //   name: 'realo',
-  //   method: null,
-  //   frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
+  {
+    name: 'realo',
+    method: scrapeRealo,
+    frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
+    hasLinkPreview: true,
+  },
   // {
   //   name: 'revimmo',
   //   method: null,

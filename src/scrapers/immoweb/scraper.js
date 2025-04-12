@@ -2,7 +2,6 @@ import { filterEmpty, deduplicateByKey } from '#utils/helpers';
 import { endpoints } from '#scrapers/immoweb/endpoints';
 import { formatData } from '#scrapers/immoweb/parser';
 import { usePuppeteer } from '#utils/scraper';
-import { logScraperStart } from '#services/logger';
 
 const PAGE_SELECTORS = {
   searchResults: 'ul.search-results__list li.search-results__item',
@@ -39,9 +38,7 @@ const extractPageData = async (page) => {
 export const scrapeImmoweb = async () => {
   const allData = [];
 
-  for (const { type, url } of endpoints) {
-    logScraperStart('Immoweb', type, url);
-
+  for (const { url } of endpoints) {
     const data = await usePuppeteer(
       url,
       PAGE_SELECTORS.nextPage,

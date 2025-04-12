@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import { logScraperStart } from '#services/logger';
-
 import { payload } from '#scrapers/latouretpetit/payload';
 import { formatData } from '#scrapers/latouretpetit/parser';
 
@@ -13,8 +11,6 @@ export const scrapeLatourEtPetit = async () => {
       'Content-Type': 'application/json',
     },
   });
-
-  logScraperStart('Latour & Petit', null, BASE_URL);
 
   return formatData(rawData);
 };

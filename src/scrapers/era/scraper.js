@@ -4,7 +4,6 @@ import axios from 'axios';
 import { endpoint } from '#scrapers/era/endpoint';
 import { formatData } from '#scrapers/era/parser';
 import { filterEmpty } from '#utils/helpers';
-import { logScraperStart } from '#services/logger';
 
 const SELECTORS = {
   link: '.rs-canonical-link-formatter a',
@@ -41,8 +40,6 @@ const extractAPIData = (data) => {
 
 export const scrapeEra = async () => {
   const { data } = await axios.get(endpoint);
-
-  logScraperStart('Era', null, endpoint);
 
   return extractAPIData(data);
 };
