@@ -51,7 +51,7 @@ export const formatData = (rawData) =>
     const { bedrooms, surface } = formatDetails(details);
     const formattedPrice = formatPrice(price);
     const type = getCategoryFromURL(url);
-    const agency = 'immoweb';
+    const agency = 'Immoweb';
     const hashString = `${agency}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
 
     return {
