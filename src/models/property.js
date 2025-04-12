@@ -13,7 +13,7 @@ const propertySchema = new Schema(
       type: String,
       required: [true, 'A property must have an agency'],
       enum: {
-        values: ['Era', 'Century 21', 'Immoweb', 'Latour & Petit'],
+        values: ['Era', 'Century 21', 'Immoweb', 'Latour & Petit', 'Realo'],
       },
     },
 

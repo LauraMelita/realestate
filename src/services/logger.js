@@ -2,16 +2,13 @@ import chalk from 'chalk';
 
 import { humanDateTime } from '#utils/helpers';
 
-export const logScraperStart = (agency, type, url) => {
+export const logScraperStart = (agency) => {
   console.log(
-    chalk.green(
-      `[${humanDateTime()}] Running scraper for ${agency} ${type ? `(${type})` : ''}`,
-    ),
+    chalk.green(`[${humanDateTime()}] Running scraper for ${agency}`),
   );
-  console.log(url);
 };
 
-export const logSaved = (agency, count) => {
+export const logSaved = (agency, count = 0) => {
   const label = `[${agency}]`;
 
   if (!count) {
@@ -19,7 +16,7 @@ export const logSaved = (agency, count) => {
     return;
   }
 
-  console.log(chalk.green(`${label} ${`${count} new properties saved`}`));
+  console.log(chalk.green(`${label} ${count} new properties saved`));
 };
 
 export const logError = (...args) => {

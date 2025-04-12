@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { endpoint } from '#scrapers/century/endpoint';
 import { formatData } from '#scrapers/century/parser';
-import { logScraperStart } from '#services/logger';
 import { deduplicateByKeys } from '#utils/helpers';
 
 const filterResults = (data) => {
@@ -18,8 +17,6 @@ const filterResults = (data) => {
 
 export const scrapeCentury = async () => {
   const { data } = await axios.get(endpoint);
-
-  logScraperStart('Century21', null, endpoint);
 
   const refinedData = filterResults(data?.data);
 

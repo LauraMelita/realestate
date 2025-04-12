@@ -1,6 +1,6 @@
 import cron from 'node-cron';
 
-import { logError } from '#services/logger';
+import { logScraperStart, logSaved, logError } from '#services/logger';
 
 import AGENCIES from '#config/agencies';
 import { saveNewProperties } from '#controllers/property';
@@ -10,8 +10,10 @@ const scheduler = () => {
   AGENCIES.forEach(({ name, method: scraper, frequency, hasLinkPreview }) => {
     cron.schedule(frequency, async () => {
       try {
+        logScraperStart(name);
         const data = await scraper();
         const newProperties = await saveNewProperties(data, name);
+        logSaved(name, newProperties.length);
 
         if (newProperties.length)
           await sendNotification(newProperties, hasLinkPreview);
