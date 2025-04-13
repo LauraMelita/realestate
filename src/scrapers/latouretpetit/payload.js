@@ -1,12 +1,9 @@
 import SEARCH_PARAMS from '#config/search';
-
-const LATOUR_ET_PETIT_CATEGORY_MAP = {
-  apartment: '2',
-};
+import { CATEGORY_MAP } from '#scrapers/latouretpetit/constants';
 
 export const payload = {
   filters: {
-    categories: [LATOUR_ET_PETIT_CATEGORY_MAP[SEARCH_PARAMS.category]],
+    categories: [CATEGORY_MAP[SEARCH_PARAMS.category]], // e.g. '2' for apartment
     min_price: '',
     max_price: SEARCH_PARAMS.maxPrice,
     more_options: SEARCH_PARAMS.features.map(({ type }) => type),

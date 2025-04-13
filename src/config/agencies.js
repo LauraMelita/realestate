@@ -1,6 +1,7 @@
 import {
   scrapeCentury,
   scrapeEra,
+  scrapeImmovlan,
   scrapeImmoweb,
   scrapeLatourEtPetit,
   scrapeRealo,
@@ -37,12 +38,12 @@ const AGENCIES = [
   //   frequency: '*/26 6-23 * * *', // Every 26 minutes from 06:00 to 23:59
   //   hasLinkPreview: null,
   // },
-  // {
-  //   name: 'immovlan',
-  //   method: null,
-  //   frequency: '*/30 6-23 * * *', // Every 30 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
+  {
+    name: 'immovlan',
+    method: scrapeImmovlan,
+    frequency: '*/30 6-23 * * *', // Every 30 minutes from 06:00 to 23:59
+    hasLinkPreview: true,
+  },
   {
     name: 'immoweb',
     method: scrapeImmoweb,

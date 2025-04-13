@@ -1,18 +1,10 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 
+import { SELECTORS } from '#scrapers/era/constants';
 import { endpoint } from '#scrapers/era/endpoint';
 import { formatData } from '#scrapers/era/parser';
 import { filterEmpty } from '#utils/helpers';
-
-const SELECTORS = {
-  link: '.rs-canonical-link-formatter a',
-  price: '.field--price',
-  address: '.field--address',
-  surface: '.field--habitable-space',
-  bedrooms: '.field--bedrooms',
-  image: 'img.image-style-square',
-};
 
 const extractAPIData = (data) => {
   const rawData = data.data.map((item) => {

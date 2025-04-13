@@ -1,4 +1,5 @@
 import { generateHash } from '#utils/helpers';
+import { AGENCY } from '#scrapers/immoweb/constants';
 
 const formatPrice = (price) => {
   return +price.split('\n')[0].replace(/[^\d]/g, '');
@@ -51,12 +52,11 @@ export const formatData = (rawData) =>
     const { bedrooms, surface } = formatDetails(details);
     const formattedPrice = formatPrice(price);
     const type = getCategoryFromURL(url);
-    const agency = 'Immoweb';
-    const hashString = `${agency}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
+    const hashString = `${AGENCY}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
 
     return {
       hash: generateHash(hashString),
-      agency,
+      agency: AGENCY,
       type,
       image,
       price: formattedPrice,

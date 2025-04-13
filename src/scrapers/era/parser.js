@@ -1,4 +1,5 @@
 import { generateHash } from '#utils/helpers';
+import { AGENCY, BASE_URL } from '#scrapers/era/constants';
 
 const formatAddress = (address) => {
   const [, postalCode, rawCity] = address.match(/,\s*(\d{4})\s+(.+)$/);
@@ -36,19 +37,17 @@ const getCategoryFromURL = (url) => {
 export const formatData = (rawData) =>
   rawData.map(({ id, image, price, address, surface, bedrooms, link }) => {
     const { postalCode, city } = formatAddress(address);
-    const agency = 'Era';
-    const baseUrl = 'https://www.era.be';
 
     return {
-      hash: generateHash(`${agency}-${id}`),
-      agency,
-      type: getCategoryFromURL(`${baseUrl}${link}`),
-      image: `${baseUrl}${image}`,
+      hash: generateHash(`${AGENCY}-${id}`),
+      agency: AGENCY,
+      type: getCategoryFromURL(`${BASE_URL}${link}`),
+      image: `${BASE_URL}${image}`,
       price: formatPrice(price),
       zip: postalCode,
       city,
       surface: formatSurface(surface),
       bedrooms: formatBedrooms(bedrooms),
-      url: `${baseUrl}${link}`,
+      url: `${BASE_URL}${link}`,
     };
   });

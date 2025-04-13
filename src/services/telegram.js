@@ -5,31 +5,33 @@ import { logError } from '#services/logger';
 
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-const sendLinkPreview = async ({ url, type, agency }) => {
-  const message = `<a href="${url}">${capitalize(type)} — ${agency}</a>`;
+const sendLinkPreview = async (property) => {
+  try {
+    const message = `<a href="${property.url}">${capitalize(property.type)} — ${property.agency}</a>`;
 
-  await bot.sendMessage(CHAT_ID, message, {
-    parse_mode: 'HTML',
-  });
+    await bot.sendMessage(CHAT_ID, message, {
+      parse_mode: 'HTML',
+    });
+  } catch (error) {
+    throw new Error(
+      `Failed to send link preview for property: ${property.hash}`,
+    );
+  }
 };
 
-const sendPhotoPreview = async ({
-  url,
-  type,
-  agency,
-  city,
-  zip,
-  surface,
-  bedrooms,
-  price,
-  image,
-}) => {
-  const caption = `<a href="${url}">${capitalize(type)} — ${agency}</a>\n${city} (${zip})\n${surface}m² · ${bedrooms} bdr. · ${formatPrice(price)}`;
+const sendPhotoPreview = async (property) => {
+  try {
+    const caption = `<a href="${property.url}">${capitalize(property.type)} — ${property.agency}</a>\n${property.city} (${property.zip})\n${property.surface}m² · ${property.bedrooms} bdr. · ${formatPrice(property.price)}`;
 
-  await bot.sendPhoto(CHAT_ID, image, {
-    caption,
-    parse_mode: 'HTML',
-  });
+    await bot.sendPhoto(CHAT_ID, property.image, {
+      caption,
+      parse_mode: 'HTML',
+    });
+  } catch (error) {
+    throw new Error(
+      `Failed to send photo preview for property: ${property.hash}`,
+    );
+  }
 };
 
 export const sendNotification = async (data, hasLinkPreview) => {

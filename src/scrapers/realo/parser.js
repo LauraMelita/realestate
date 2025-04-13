@@ -1,4 +1,5 @@
 import { generateHash } from '#utils/helpers';
+import { AGENCY, BASE_URL } from '#scrapers/realo/constants';
 
 export const formatData = (rawData) =>
   rawData.map(
@@ -14,8 +15,8 @@ export const formatData = (rawData) =>
       const agency = 'Realo';
 
       return {
-        hash: generateHash(`${agency}-${id}`),
-        agency,
+        hash: generateHash(`${AGENCY}-${id}`),
+        agency: AGENCY,
         type: type.toLowerCase(),
         image: avatarPictureUrl.srcAt2x,
         price,
@@ -23,7 +24,7 @@ export const formatData = (rawData) =>
         city: address.locality,
         surface: habitableArea,
         bedrooms: numberOfBedrooms,
-        url: `https://www.realo.be/fr/${address.id}?l=${id}`,
+        url: `${BASE_URL}/fr/${address.id}?l=${id}`,
       };
     },
   );

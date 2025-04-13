@@ -1,10 +1,9 @@
 import SEARCH_PARAMS from '#config/search';
+import { API_URL } from '#scrapers/realo/constants';
 import { buildSearchUrl } from '#utils/helpers';
 
-const BASE_URL = 'https://www.realo.be/fr/search/estates.json';
-
 // NOTE: 'amenities[]' doesn't seem to filter results on Realo. Omitting it for now.
-const PARAMS = {
+const params = {
   'ways[]': 'SALE',
   'types[]': SEARCH_PARAMS.category.toUpperCase(),
   isListSearch: true,
@@ -15,4 +14,4 @@ const PARAMS = {
   // 'amenities[]': 'HAS_TERRACE',
 };
 
-export const endpoint = buildSearchUrl(BASE_URL, PARAMS);
+export const endpoint = buildSearchUrl(API_URL, params);

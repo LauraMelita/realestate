@@ -4,7 +4,7 @@ import { humanDateTime } from '#utils/helpers';
 
 export const logScraperStart = (agency) => {
   console.log(
-    chalk.green(`[${humanDateTime()}] Running scraper for ${agency}`),
+    chalk.yellow(`[${humanDateTime()}] Running scraper for ${agency}`),
   );
 };
 
