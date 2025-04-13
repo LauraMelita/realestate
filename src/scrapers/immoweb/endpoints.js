@@ -1,29 +1,19 @@
 import SEARCH_PARAMS from '#config/search';
+import { BASE_URL, FEATURE_PARAMS } from '#scrapers/immoweb/constants';
 import { buildSearchUrl } from '#utils/helpers';
 
 const { category, locations, maxPrice, minSurface, minRooms, features } =
   SEARCH_PARAMS;
 
-const BASE_URL = `https://www.immoweb.be/en/search/${category}/for-sale?countries=BE`;
+const searchUrl = `${BASE_URL}/${category}/for-sale?countries=BE`;
 
-const BASE_PARAMS = {
+const baseParams = {
   postalCodes: locations.map(({ postalCode }) => postalCode),
   maxPrice,
   minSurface,
   isALifeAnnuitySale: false,
   isUnderOption: false,
   minBedroomCount: minRooms,
-};
-
-const FEATURE_PARAMS = {
-  garden: {
-    flag: { hasGarden: true },
-    surfaceKey: 'minGardenSurface',
-  },
-  terrace: {
-    flag: { hasGarden: false },
-    surfaceKey: 'minTerraceSurface',
-  },
 };
 
 // Immoweb returns fewer results when combining garden and terrace filters,
@@ -34,8 +24,8 @@ export const endpoints = features.map(({ type, minSurface }) => {
 
   return {
     type,
-    url: buildSearchUrl(BASE_URL, {
-      ...BASE_PARAMS,
+    url: buildSearchUrl(searchUrl, {
+      ...baseParams,
       ...flag,
       [surfaceKey]: minSurface,
     }),

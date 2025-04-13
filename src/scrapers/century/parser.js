@@ -1,14 +1,11 @@
 import { generateHash } from '#utils/helpers';
-
-const TYPE_MAP = {
-  APARTMENT: 'appartement',
-  HOUSE: 'maison',
-};
-
-const LISTING_TYPE_MAP = {
-  FOR_SALE: 'a-vendre',
-  FOR_RENT: 'a-louer',
-};
+import {
+  AGENCY,
+  IMAGE_URL,
+  LISTING_TYPE_MAP,
+  TYPE_MAP,
+  LINK_URL,
+} from '#scrapers/century/constants';
 
 const buildImageUrl = (id, images) => {
   if (!images?.length) return null;
@@ -22,19 +19,18 @@ const buildImageUrl = (id, images) => {
 
   const encoded = Buffer.from(JSON.stringify(imageMetadata)).toString('base64');
 
-  return `https://images.century21.be/${encoded}`;
+  return `${IMAGE_URL}/${encoded}`;
 };
 
 export const formatData = (rawData) =>
   rawData.map(
     ({ id, type, listingType, images, price, address, surface, rooms }) => {
-      const agency = 'Century 21';
       const category = TYPE_MAP[type];
       const listing = LISTING_TYPE_MAP[listingType];
 
       return {
-        hash: generateHash(`${agency}-${id}`),
-        agency,
+        hash: generateHash(`${AGENCY}-${id}`),
+        agency: AGENCY,
         type: type.toLowerCase(),
         image: buildImageUrl(id, images),
         price: price.amount,
@@ -42,7 +38,7 @@ export const formatData = (rawData) =>
         city: address.city,
         surface: surface.habitableSurfaceArea.value,
         bedrooms: rooms.numberOfBedrooms,
-        url: `https://www.century21.be/fr/properiete/${listing}/${category}/${address.city.toLowerCase()}/${id}`,
+        url: `${LINK_URL}/${listing}/${category}/${address.city.toLowerCase()}/${id}`,
       };
     },
   );

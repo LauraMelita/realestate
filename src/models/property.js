@@ -13,7 +13,14 @@ const propertySchema = new Schema(
       type: String,
       required: [true, 'A property must have an agency'],
       enum: {
-        values: ['Era', 'Century 21', 'Immoweb', 'Latour & Petit', 'Realo'],
+        values: [
+          'Era',
+          'Century 21',
+          'Immovlan',
+          'Immoweb',
+          'Latour & Petit',
+          'Realo',
+        ],
       },
     },
 
@@ -36,6 +43,10 @@ const propertySchema = new Schema(
 
     price: {
       type: Number,
+      validate: {
+        validator: (value) => value === null || typeof value === 'number',
+        message: 'Price must be a number or null if unknown',
+      },
       default: null,
     },
 

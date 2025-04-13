@@ -1,3 +1,4 @@
+import fs from 'fs/promises';
 import UserAgent from 'user-agents';
 import crypto from 'crypto';
 
@@ -64,7 +65,8 @@ export const deduplicateByKeys = (arr, keys) =>
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const formatPrice = (price) => `€${price.toLocaleString('en-US')}`;
+export const formatPrice = (price) =>
+  price ? `€${price.toLocaleString('en-US')}` : 'price on demand';
 
 export const humanDateTime = () => {
   const now = new Date();
@@ -79,4 +81,8 @@ export const humanDateTime = () => {
       second: '2-digit',
     })
     .replace(',', '');
+};
+
+export const writeFile = (path, data) => {
+  fs.writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
 };

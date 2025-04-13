@@ -1,9 +1,8 @@
 import SEARCH_PARAMS from '#config/search';
+import { API_URL } from '#scrapers/century/constants';
 import { buildSearchUrl } from '#utils/helpers';
 
 const { category, locations, maxPrice, minSurface, features } = SEARCH_PARAMS;
-
-const BASE_URL = 'https://api.prd.cloud.century21.be/api/v2/properties';
 
 const filterPayload = {
   bool: {
@@ -51,10 +50,10 @@ const filterPayload = {
   },
 };
 
-const PARAMS = {
+const params = {
   filter: Buffer.from(JSON.stringify(filterPayload)).toString('base64'),
   pageSize: 1000,
   sort: '-creationDate',
 };
 
-export const endpoint = buildSearchUrl(BASE_URL, PARAMS);
+export const endpoint = buildSearchUrl(API_URL, params);
