@@ -1,17 +1,19 @@
-import SEARCH_PARAMS from '#config/search';
-import { API_URL } from '#scrapers/realo/constants';
+import SEARCH_CONFIG from '#config/search';
+import REALO_CONFIG from '#scrapers/realo/constants';
 import { buildSearchUrl } from '#utils/helpers';
+
+const { category, purpose, locations, maxPrice, minSurface } = SEARCH_CONFIG;
 
 // NOTE: 'amenities[]' doesn't seem to filter results on Realo. Omitting it for now.
 const params = {
-  'ways[]': 'SALE',
-  'types[]': SEARCH_PARAMS.category.toUpperCase(),
+  'ways[]': purpose.toUpperCase(),
+  'types[]': category.toUpperCase(),
   isListSearch: true,
-  boundaryAddressIds: SEARCH_PARAMS.locations.map(({ realoId }) => realoId),
-  priceMax: SEARCH_PARAMS.maxPrice,
-  habitablesizeMin: SEARCH_PARAMS.minSurface,
+  boundaryAddressIds: locations.map(({ postalCode }) => REALO_CONFIG.zipIds[postalCode]),
+  priceMax: maxPrice,
+  habitablesizeMin: minSurface,
   // 'amenities[]': 'HAS_GARDEN',
   // 'amenities[]': 'HAS_TERRACE',
 };
 
-export const endpoint = buildSearchUrl(API_URL, params);
+export const endpoint = buildSearchUrl(REALO_CONFIG.apiUrl, params);

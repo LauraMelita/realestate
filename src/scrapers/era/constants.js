@@ -1,18 +1,25 @@
-export const AGENCY = 'Era';
-
-export const API_URL = 'https://www.era.be/en/jsonapi/index/property_index';
-
-export const BASE_URL = 'https://www.era.be';
-
-export const CATEGORY_MAP = {
-  apartment: '44',
+const ERA_CONFIG = {
+  title: 'Era',
+  apiUrl: 'https://www.era.be/en/jsonapi/index/property_index',
+  baseUrl: 'https://www.era.be',
+  propertyType: {
+    house: '46',
+    apartment: '44',
+  },
+  zipIds: {
+    1083: 2879, // Ganshoren
+    1081: 2881, // Koekelberg
+    1090: 2880, // Jette
+    1082: 2883, // Berchem-Sainte-Agathe
+  },
+  selectors: {
+    link: '.rs-canonical-link-formatter a',
+    price: '.field--price',
+    address: '.field--address',
+    surface: '.field--habitable-space',
+    bedrooms: '.field--bedrooms',
+    image: 'img.image',
+  },
 };
 
-export const SELECTORS = {
-  link: '.rs-canonical-link-formatter a',
-  price: '.field--price',
-  address: '.field--address',
-  surface: '.field--habitable-space',
-  bedrooms: '.field--bedrooms',
-  image: 'img.image-style-square',
-};
+export default ERA_CONFIG;

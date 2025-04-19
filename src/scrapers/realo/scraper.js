@@ -10,7 +10,7 @@ export const scrapeRealo = async () => {
   const { data } = await axios.get(endpoint);
 
   const refinedData = filterResults(
-    data?.data?.list?.assigns?.componentEstateListGrid?.data?.items,
+    data?.data?.list?.assigns?.componentEstateListGrid?.data?.items || []
   );
 
   return formatData(refinedData);

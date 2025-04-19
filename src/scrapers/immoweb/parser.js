@@ -1,5 +1,6 @@
+import SEARCH_CONFIG from '#config/search';
+import IMMOWEB_CONFIG from '#scrapers/immoweb/constants';
 import { generateHash } from '#utils/helpers';
-import { AGENCY } from '#scrapers/immoweb/constants';
 
 const formatPrice = (price) => {
   return +price.split('\n')[0].replace(/[^\d]/g, '');
@@ -29,34 +30,18 @@ const formatLocality = (locality) => {
   };
 };
 
-const getCategoryFromURL = (url) => {
-  const categorySegment = url.split('/')[5];
-
-  switch (categorySegment) {
-    case 'ground-floor':
-      return 'apartment';
-    case 'loft':
-      return 'apartment';
-    case 'penthouse':
-      return 'apartment';
-    case 'new-real-estate-project-apartments':
-      return 'apartment';
-    default:
-      return categorySegment;
-  }
-};
-
 export const formatData = (rawData) =>
   rawData.map(({ image, price, locality, details, url }) => {
     const { postalCode, city } = formatLocality(locality);
     const { bedrooms, surface } = formatDetails(details);
     const formattedPrice = formatPrice(price);
-    const type = getCategoryFromURL(url);
-    const hashString = `${AGENCY}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
+    const agency = IMMOWEB_CONFIG.title;
+    const type = SEARCH_CONFIG.category;
+    const hashString = `${agency}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
 
     return {
       hash: generateHash(hashString),
-      agency: AGENCY,
+      agency,
       type,
       image,
       price: formattedPrice,
@@ -64,6 +49,8 @@ export const formatData = (rawData) =>
       city,
       surface,
       bedrooms,
+      garden: null, // TODO
+      terrace: null, // TODO
       url,
     };
   });
