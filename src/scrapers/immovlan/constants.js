@@ -1,8 +1,14 @@
-export const AGENCY = 'Immovlan';
-
-export const API_URL = 'https://immovlan.be/en/workers/search/api/search';
-
-export const FEATURE_TAG_MAP = {
-  garden: 'HasGarden',
-  terrace: 'HasTerrace',
+const IMMOVLAN_CONFIG = {
+  title: 'Immovlan',
+  apiUrl: 'https://immovlan.be/en/workers/search/api/search',
+  listingType: {
+    sale: 'for-sale,in-public-sale',
+    rent: 'for-rent',
+  },
+  features: {
+    garden: 'HasGarden',
+    terrace: 'HasTerrace',
+  },
 };
+
+export default IMMOVLAN_CONFIG;

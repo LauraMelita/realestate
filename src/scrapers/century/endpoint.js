@@ -1,20 +1,20 @@
-import SEARCH_PARAMS from '#config/search';
-import { API_URL } from '#scrapers/century/constants';
+import SEARCH_CONFIG from '#config/search';
+import CENTURY_CONFIG from '#scrapers/century/constants';
 import { buildSearchUrl } from '#utils/helpers';
 
-const { category, locations, maxPrice, minSurface, features } = SEARCH_PARAMS;
+const { category, purpose, locations, maxPrice, minSurface, features } = SEARCH_CONFIG;
 
 const filterPayload = {
   bool: {
     filter: {
       bool: {
         must: [
-          { match: { listingType: 'FOR_SALE' } },
           {
             bool: {
               should: [{ match: { 'address.countryCode': 'be' } }],
             },
           },
+          { match: { listingType: CENTURY_CONFIG.listingType[purpose] } },
           { match: { type: category.toUpperCase() } },
           {
             bool: {
@@ -33,7 +33,7 @@ const filterPayload = {
           {
             range: {
               'surface.habitableSurfaceArea.value': {
-                gte: +minSurface,
+                gte: minSurface,
               },
             },
           },
@@ -56,4 +56,4 @@ const params = {
   sort: '-creationDate',
 };
 
-export const endpoint = buildSearchUrl(API_URL, params);
+export const endpoint = buildSearchUrl(CENTURY_CONFIG.apiUrl, params);

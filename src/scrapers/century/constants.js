@@ -1,17 +1,20 @@
-export const AGENCY = 'Century 21';
-
-export const API_URL = 'https://api.prd.cloud.century21.be/api/v2/properties';
-
-export const LINK_URL = 'https://www.century21.be/fr/properiete';
-
-export const IMAGE_URL = 'https://images.century21.be';
-
-export const TYPE_MAP = {
-  APARTMENT: 'appartement',
-  HOUSE: 'maison',
+const CENTURY_CONFIG = {
+  title: 'Century 21',
+  apiUrl: 'https://api.prd.cloud.century21.be/api/v2/properties',
+  linkUrl: 'https://www.century21.be/fr/properiete',
+  imageUrl: 'https://images.century21.be',
+  slug: {
+    sale: 'a-vendre',
+    rent: 'a-louer',
+  },
+  propertyType: {
+    house: 'maison',
+    apartment: 'appartement',
+  },
+  listingType: {
+    sale: 'FOR_SALE',
+    rent: 'FOR_RENT',
+  },
 };
 
-export const LISTING_TYPE_MAP = {
-  FOR_SALE: 'a-vendre',
-  FOR_RENT: 'a-louer',
-};
+export default CENTURY_CONFIG;

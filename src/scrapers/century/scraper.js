@@ -18,7 +18,7 @@ const filterResults = (data) => {
 export const scrapeCentury = async () => {
   const { data } = await axios.get(endpoint);
 
-  const refinedData = filterResults(data?.data);
+  const refinedData = filterResults(data?.data || []);
 
   return formatData(refinedData);
 };

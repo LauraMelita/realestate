@@ -14,8 +14,9 @@ const propertySchema = new Schema(
       required: [true, 'A property must have an agency'],
       enum: {
         values: [
-          'Era',
           'Century 21',
+          'Era',
+          'Expertissimmo',
           'Immovlan',
           'Immoweb',
           'Latour & Petit',
@@ -47,6 +48,7 @@ const propertySchema = new Schema(
         validator: (value) => value === null || typeof value === 'number',
         message: 'Price must be a number or null if unknown',
       },
+      set: (value) => (typeof value === 'number' ? value : null),
       default: null,
     },
 
@@ -68,6 +70,26 @@ const propertySchema = new Schema(
     bedrooms: {
       type: Number,
       required: [true, 'A property must have bedrooms'],
+      default: null,
+    },
+
+    garden: {
+      type: Boolean,
+      validate: {
+        validator: (value) => value === null || typeof value === 'boolean',
+        message: 'Garden must be true, false, or null if unknown',
+      },
+      set: (value) => (typeof value === 'boolean' ? value : null),
+      default: null,
+    },
+
+    terrace: {
+      type: Boolean,
+      validate: {
+        validator: (value) => value === null || typeof value === 'boolean',
+        message: 'Terrace must be true, false, or null if unknown',
+      },
+      set: (value) => (typeof value === 'boolean' ? value : null),
       default: null,
     },
 

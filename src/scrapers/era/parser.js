@@ -1,9 +1,9 @@
+import SEARCH_CONFIG from '#config/search';
+import ERA_CONFIG from '#scrapers/era/constants';
 import { generateHash } from '#utils/helpers';
-import { AGENCY, BASE_URL } from '#scrapers/era/constants';
 
 const formatAddress = (address) => {
   const [, postalCode, rawCity] = address.match(/,\s*(\d{4})\s+(.+)$/);
-
   const city = rawCity.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
   return { postalCode, city };
@@ -27,27 +27,22 @@ const formatBedrooms = (bedrooms) => {
   return bedroomsMatch ? +bedroomsMatch[1] : null;
 };
 
-const getCategoryFromURL = (url) => {
-  const categorySegment = new URL(url).pathname.split('/')[4];
-
-  if (categorySegment === 'house') return 'house';
-  if (categorySegment === 'flat-apartment') return 'apartment';
-};
-
 export const formatData = (rawData) =>
   rawData.map(({ id, image, price, address, surface, bedrooms, link }) => {
     const { postalCode, city } = formatAddress(address);
 
     return {
-      hash: generateHash(`${AGENCY}-${id}`),
-      agency: AGENCY,
-      type: getCategoryFromURL(`${BASE_URL}${link}`),
-      image: `${BASE_URL}${image}`,
+      hash: generateHash(`${ERA_CONFIG.title}-${id}`),
+      agency: ERA_CONFIG.title,
+      type: SEARCH_CONFIG.category,
+      image: `${ERA_CONFIG.baseUrl}${image}`,
       price: formatPrice(price),
       zip: postalCode,
       city,
       surface: formatSurface(surface),
       bedrooms: formatBedrooms(bedrooms),
-      url: `${BASE_URL}${link}`,
+      terrace: null,
+      garden: null,
+      url: `${ERA_CONFIG.baseUrl}${link}`,
     };
   });

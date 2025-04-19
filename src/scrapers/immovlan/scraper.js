@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import SEARCH_PARAMS from '#config/search';
+import SEARCH_CONFIG from '#config/search';
+import IMMOVLAN_CONFIG from '#scrapers/immovlan/constants';
 import { createUserAgent } from '#utils/helpers';
-import { API_URL, FEATURE_TAG_MAP } from '#scrapers/immovlan/constants';
 import { payload } from '#scrapers/immovlan/payload';
 import { formatData } from '#scrapers/immovlan/parser';
 
@@ -13,9 +13,7 @@ const filterResults = (data) => {
     const isProject = item.displayUrl.includes('/projectdetail');
 
     // Filtering features manually since the API only returns results matching all tags together
-    const featureTags = SEARCH_PARAMS.features.map(
-      ({ type }) => FEATURE_TAG_MAP[type],
-    );
+    const featureTags = SEARCH_CONFIG.features.map(({ type }) => IMMOVLAN_CONFIG.features[type]);
 
     const hasFeatures = featureTags.some((tag) => item.tags.includes(tag));
 
@@ -24,14 +22,14 @@ const filterResults = (data) => {
 };
 
 export const scrapeImmovlan = async () => {
-  const { data: rawData } = await axios.post(API_URL, payload, {
+  const { data: rawData } = await axios.post(IMMOVLAN_CONFIG.apiUrl, payload, {
     headers: {
       'Content-Type': 'application/json',
       'User-Agent': createUserAgent(),
     },
   });
 
-  const refinedData = filterResults(rawData?.results?.properties);
+  const refinedData = filterResults(rawData?.results?.properties || []);
 
   return formatData(refinedData);
 };

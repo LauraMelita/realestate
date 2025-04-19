@@ -1,30 +1,21 @@
+import SEARCH_CONFIG from '#config/search';
+import LATOUR_ET_PETIT_CONFIG from '#scrapers/latouretpetit/constants';
 import { generateHash } from '#utils/helpers';
-import { AGENCY, BASE_URL } from '#scrapers/latouretpetit/constants';
 
 export const formatData = (rawData) =>
-  rawData?.estates.map(
-    ({
-      id,
-      category,
-      pictures,
+  rawData.map(({ id, pictures, price, zip, city, area, rooms, terrace, garden, url: pathname }) => {
+    return {
+      hash: generateHash(`${LATOUR_ET_PETIT_CONFIG.title}-${id}`),
+      agency: LATOUR_ET_PETIT_CONFIG.title,
+      type: SEARCH_CONFIG.category,
+      image: pictures[0]?.urlLarge,
       price,
       zip,
       city,
-      area,
-      rooms,
-      url: pathname,
-    }) => {
-      return {
-        hash: generateHash(`${AGENCY}-${id}`),
-        agency: AGENCY,
-        type: category === 1 ? 'house' : 'apartment',
-        image: pictures[0]?.urlLarge,
-        price,
-        zip,
-        city,
-        surface: area,
-        bedrooms: rooms,
-        url: `${BASE_URL}/${pathname}`,
-      };
-    },
-  );
+      surface: area,
+      bedrooms: rooms,
+      terrace: terrace === 1,
+      garden: garden === 1,
+      url: `${LATOUR_ET_PETIT_CONFIG.baseUrl}/${pathname}`,
+    };
+  });
