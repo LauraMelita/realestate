@@ -21,16 +21,12 @@ export const saveNewProperties = async (properties) => {
   const hashes = properties.map((prop) => prop.hash);
 
   // Find existing hashes in DB
-  const existing = await Property.find({ hash: { $in: hashes } }).select(
-    'hash',
-  );
+  const existing = await Property.find({ hash: { $in: hashes } }).select('hash');
 
   const existingHashes = new Set(existing.map((prop) => prop.hash));
 
   // Filter only new properties
-  const newProperties = properties.filter(
-    (prop) => !existingHashes.has(prop.hash),
-  );
+  const newProperties = properties.filter((prop) => !existingHashes.has(prop.hash));
 
   return newProperties.length ? await Property.insertMany(newProperties) : [];
 };

@@ -7,25 +7,15 @@ import { logError } from '#services/logger';
 // PUPPETEER
 // ============================================================
 
-const paginate = async (
-  page,
-  currentUrl,
-  scrapeFn,
-  nextPageSelector,
-  results = [],
-) => {
+const paginate = async (page, currentUrl, scrapeFn, nextPageSelector, results = []) => {
   await page.goto(currentUrl, { waitUntil: 'networkidle2' });
 
   const data = await scrapeFn(page);
   results.push(...data);
 
-  const nextPageUrl = await page
-    .$eval(nextPageSelector, (a) => a?.href)
-    .catch(() => null);
+  const nextPageUrl = await page.$eval(nextPageSelector, (a) => a?.href).catch(() => null);
 
-  return nextPageUrl
-    ? paginate(page, nextPageUrl, scrapeFn, nextPageSelector, results)
-    : results;
+  return nextPageUrl ? paginate(page, nextPageUrl, scrapeFn, nextPageSelector, results) : results;
 };
 
 export const usePuppeteer = async (url, nextPageSelector, scrapeFn) => {
