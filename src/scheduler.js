@@ -15,8 +15,7 @@ const scheduler = () => {
         const newProperties = await saveNewProperties(data, name);
         logSaved(name, newProperties.length);
 
-        if (newProperties.length)
-          await sendNotification(newProperties, hasLinkPreview);
+        if (newProperties.length) await sendNotification(newProperties, hasLinkPreview);
       } catch (error) {
         logError(`Error running scraper for ${name}:`, error.message);
       }

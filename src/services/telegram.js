@@ -13,9 +13,7 @@ const sendLinkPreview = async (property) => {
       parse_mode: 'HTML',
     });
   } catch (error) {
-    throw new Error(
-      `Failed to send link preview for property: ${property.hash}`,
-    );
+    throw new Error(`Failed to send link preview for property: ${property.hash}`);
   }
 };
 
@@ -28,9 +26,7 @@ const sendPhotoPreview = async (property) => {
       parse_mode: 'HTML',
     });
   } catch (error) {
-    throw new Error(
-      `Failed to send photo preview for property: ${property.hash}`,
-    );
+    throw new Error(`Failed to send photo preview for property: ${property.hash}`);
   }
 };
 

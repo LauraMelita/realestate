@@ -3,9 +3,7 @@ import chalk from 'chalk';
 import { humanDateTime } from '#utils/helpers';
 
 export const logScraperStart = (agency) => {
-  console.log(
-    chalk.yellow(`[${humanDateTime()}] Running scraper for ${agency}`),
-  );
+  console.log(chalk.yellow(`[${humanDateTime()}] Running scraper for ${agency}`));
 };
 
 export const logSaved = (agency, count = 0) => {

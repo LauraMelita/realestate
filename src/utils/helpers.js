@@ -15,9 +15,7 @@ export const buildSearchUrl = (baseUrl, params = {}) => {
 export const buildBracketedSearchUrl = (baseUrl, params = {}) => {
   const parts = Object.entries(params).map(([key, value]) => {
     const encodedKey = encodeURIComponent(key);
-    const encodedValue = Array.isArray(value)
-      ? value.join(',')
-      : encodeURIComponent(value);
+    const encodedValue = Array.isArray(value) ? value.join(',') : encodeURIComponent(value);
 
     const finalKey = encodedKey.replace(/%5B/g, '[').replace(/%5D/g, ']');
 
@@ -36,8 +34,7 @@ export const buildBracketedSearchUrl = (baseUrl, params = {}) => {
 
 export const createUserAgent = () => new UserAgent().random().toString();
 
-export const generateHash = (url) =>
-  crypto.createHash('md5').update(url).digest('hex');
+export const generateHash = (url) => crypto.createHash('md5').update(url).digest('hex');
 
 export const filterEmpty = (arr) =>
   arr.filter(
@@ -83,6 +80,10 @@ export const humanDateTime = () => {
     .replace(',', '');
 };
 
-export const writeFile = (path, data) => {
-  fs.writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
+export const writeFile = async (path, data) => {
+  try {
+    await fs.writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
+  } catch (error) {
+    console.error(`Failed to write file at ${path}`, error);
+  }
 };
