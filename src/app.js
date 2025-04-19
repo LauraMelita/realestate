@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import propertyRouter from '#routes/property';
+import { handleFavicon } from '#middlewares/favicon';
 import { handleNotFound } from '#middlewares/notFound';
 import { formatError, handleError } from '#middlewares/error';
 
@@ -14,6 +15,9 @@ app.use(cors());
 app.use(morgan('dev'));
 
 app.use('/properties', propertyRouter);
+
+app.use(handleFavicon);
+
 app.all('*', handleNotFound);
 
 app.use([formatError, handleError]);
