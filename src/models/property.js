@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
 
+import { isValueOrNull, nullify } from '#utils/helpers';
+
 const propertySchema = new Schema(
   {
     hash: {
@@ -44,11 +46,8 @@ const propertySchema = new Schema(
 
     price: {
       type: Number,
-      validate: {
-        validator: (value) => value === null || typeof value === 'number',
-        message: 'Price must be a number or null if unknown',
-      },
-      set: (value) => (typeof value === 'number' ? value : null),
+      validate: isValueOrNull('number', 'Price must be a number or null if unknown'),
+      set: nullify('number'),
       default: null,
     },
 
@@ -69,27 +68,22 @@ const propertySchema = new Schema(
 
     bedrooms: {
       type: Number,
-      required: [true, 'A property must have bedrooms'],
+      validate: isValueOrNull('number', 'Bedrooms must be a number or null if unknown'),
+      set: nullify('number'),
       default: null,
     },
 
     garden: {
       type: Boolean,
-      validate: {
-        validator: (value) => value === null || typeof value === 'boolean',
-        message: 'Garden must be true, false, or null if unknown',
-      },
-      set: (value) => (typeof value === 'boolean' ? value : null),
+      validate: isValueOrNull('boolean', 'Garden must be true, false, or null if unknown'),
+      set: nullify('boolean'),
       default: null,
     },
 
     terrace: {
       type: Boolean,
-      validate: {
-        validator: (value) => value === null || typeof value === 'boolean',
-        message: 'Terrace must be true, false, or null if unknown',
-      },
-      set: (value) => (typeof value === 'boolean' ? value : null),
+      validate: isValueOrNull('boolean', 'Terrace must be true, false, or null if unknown'),
+      set: nullify('boolean'),
       default: null,
     },
 
@@ -112,7 +106,7 @@ const propertySchema = new Schema(
         delete ret._id;
       },
     },
-  },
+  }
 );
 
 const Property = model('Property', propertySchema);

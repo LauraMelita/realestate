@@ -2,6 +2,16 @@ import fs from 'fs/promises';
 import UserAgent from 'user-agents';
 import crypto from 'crypto';
 
+// ============================================================
+// REQUEST
+// ============================================================
+
+export const createUserAgent = () => new UserAgent().random().toString();
+
+// ============================================================
+// URL
+// ============================================================
+
 export const buildSearchUrl = (baseUrl, params = {}) => {
   const url = new URL(baseUrl);
 
@@ -32,16 +42,16 @@ export const buildBracketedSearchUrl = (baseUrl, params = {}) => {
   return `${baseUrl}?${parts.join('&')}`;
 };
 
-export const createUserAgent = () => new UserAgent().random().toString();
-
-export const generateHash = (url) => crypto.createHash('md5').update(url).digest('hex');
+// ============================================================
+// ARRAY
+// ============================================================
 
 export const filterEmpty = (arr) =>
   arr.filter(
     (item) =>
       item !== null &&
       item !== undefined &&
-      (typeof item !== 'object' || Object.keys(item).length > 0),
+      (typeof item !== 'object' || Object.keys(item).length > 0)
   );
 
 export const deduplicateByKey = (arr, key) =>
@@ -56,14 +66,19 @@ export const deduplicateByKeys = (arr, keys) =>
           .join('|');
 
         return [compositeKey, item];
-      }),
-    ).values(),
+      })
+    ).values()
   );
+
+// ============================================================
+// STRING
+// ============================================================
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const formatPrice = (price) =>
-  price ? `€${price.toLocaleString('en-US')}` : 'price on demand';
+// ============================================================
+// DATE
+// ============================================================
 
 export const humanDateTime = () => {
   const now = new Date();
@@ -79,6 +94,30 @@ export const humanDateTime = () => {
     })
     .replace(',', '');
 };
+
+// ============================================================
+// FORMATTING
+// ============================================================
+
+export const generateHash = (url) => crypto.createHash('md5').update(url).digest('hex');
+
+export const formatPrice = (price) =>
+  price ? `€${price.toLocaleString('en-US')}` : 'price on demand';
+
+// ============================================================
+// VALIDATION
+// ============================================================
+
+export const isValueOrNull = (type, message) => ({
+  validator: (value) => value === null || typeof value === type,
+  message,
+});
+
+export const nullify = (type) => (value) => (typeof value === type ? value : null);
+
+// ============================================================
+// DEBUG
+// ============================================================
 
 export const writeFile = async (path, data) => {
   try {
