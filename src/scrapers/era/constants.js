@@ -7,10 +7,16 @@ const ERA_CONFIG = {
     apartment: '44',
   },
   zipIds: {
-    1083: 2879, // Ganshoren
+    1030: 2875, // Schaerbeek
+    1060: 2884, // Saint-Gilles
+    1070: 2876, // Anderlecht
+    1080: 2885, // Molenbeek-Saint-Jean
     1081: 2881, // Koekelberg
-    1090: 2880, // Jette
     1082: 2883, // Berchem-Sainte-Agathe
+    1083: 2879, // Ganshoren
+    1090: 2880, // Jette
+    1160: 2882, // Auderghem
+    1210: 2886, // Saint-Josse-ten-Noode
   },
   selectors: {
     link: '.rs-canonical-link-formatter a',
