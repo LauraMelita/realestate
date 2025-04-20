@@ -16,6 +16,7 @@ const propertySchema = new Schema(
       required: [true, 'A property must have an agency'],
       enum: {
         values: [
+          'By the Way',
           'Century 21',
           'Era',
           'Expertissimmo',
@@ -63,7 +64,9 @@ const propertySchema = new Schema(
 
     surface: {
       type: Number,
-      required: [true, 'A property must have a surface'],
+      validate: isValueOrNull('number', 'Surface must be a number or null if unknown'),
+      set: nullify('number'),
+      default: null,
     },
 
     bedrooms: {

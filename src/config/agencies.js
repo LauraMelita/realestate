@@ -1,4 +1,5 @@
 import {
+  scrapeBytheway,
   scrapeCentury,
   scrapeEra,
   scrapeExpertissimmo,
@@ -9,12 +10,12 @@ import {
 } from '#scrapers/index';
 
 const AGENCIES = [
-  // {
-  //   name: 'bytheway',
-  //   method: null,
-  //   frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
+  {
+    name: 'bytheway',
+    method: scrapeBytheway,
+    frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
+    hasLinkPreview: true,
+  },
   {
     name: 'century',
     method: scrapeCentury,
