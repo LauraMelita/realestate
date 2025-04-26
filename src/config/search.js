@@ -5,6 +5,7 @@ const SEARCH_CONFIG = {
   // TODO: When updating locations, make sure to also update corresponding IDs in Realo and Era configs
   locations: [
     { postalCode: 1030, city: 'Schaerbeek' },
+    { postalCode: 1040, city: 'Etterbeek' },
     { postalCode: 1060, city: 'Saint-Gilles' },
     { postalCode: 1070, city: 'Anderlecht' },
     { postalCode: 1080, city: 'Molenbeek-Saint-Jean' },

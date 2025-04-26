@@ -8,6 +8,7 @@ const ERA_CONFIG = {
   },
   zipIds: {
     1030: 2875, // Schaerbeek
+    1040: 2878, // Etterbeek
     1060: 2884, // Saint-Gilles
     1070: 2876, // Anderlecht
     1080: 2885, // Molenbeek-Saint-Jean
