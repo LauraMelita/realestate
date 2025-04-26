@@ -4,6 +4,7 @@ const REALO_CONFIG = {
   baseUrl: 'https://www.realo.be',
   zipIds: {
     1030: 5758985, // Schaerbeek
+    1040: 5387928, // Etterbeek
     1060: 5758988, // Saint-Gilles
     1070: 5758989, // Anderlecht
     1080: 5758990, // Molenbeek-Saint-Jean
