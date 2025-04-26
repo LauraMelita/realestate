@@ -20,6 +20,7 @@ const propertySchema = new Schema(
           'Century 21',
           'Era',
           'Expertissimmo',
+          'Immoabita',
           'Immovlan',
           'Immoweb',
           'Latour & Petit',
