@@ -42,6 +42,8 @@ export const buildBracketedSearchUrl = (baseUrl, params = {}) => {
   return `${baseUrl}?${parts.join('&')}`;
 };
 
+export const encodeObjectAsUrlParam = (obj) => encodeURIComponent(JSON.stringify(obj));
+
 // ============================================================
 // ARRAY
 // ============================================================

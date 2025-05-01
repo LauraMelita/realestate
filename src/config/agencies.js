@@ -7,6 +7,7 @@ import {
   scrapeImmovlan,
   scrapeImmoweb,
   scrapeLatourEtPetit,
+  scrapeOralis,
   scrapeRealo,
 } from '#scrapers/index';
 
@@ -60,23 +61,17 @@ const AGENCIES = [
     hasLinkPreview: false,
   },
   // {
-  //   name: 'lecobel',
-  //   method: null,
-  //   frequency: '*/22 6-23 * * *', // Every 22 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
-  // {
   //   name: 'myimmo',
   //   method: null,
   //   frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
   //   hasLinkPreview: null,
   // },
-  // {
-  //   name: 'oralis',
-  //   method: null,
-  //   frequency: '*/29 6-23 * * *', // Every 29 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
+  {
+    name: 'oralis',
+    method: scrapeOralis,
+    frequency: '*/29 6-23 * * *', // Every 29 minutes from 06:00 to 23:59
+    hasLinkPreview: true,
+  },
   {
     name: 'realo',
     method: scrapeRealo,
