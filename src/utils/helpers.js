@@ -42,6 +42,25 @@ export const buildBracketedSearchUrl = (baseUrl, params = {}) => {
   return `${baseUrl}?${parts.join('&')}`;
 };
 
+export const buildPHPSearchUrl = (baseUrl, params = {}) => {
+  const url = new URL(baseUrl);
+  const searchParams = [];
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((v) => {
+        searchParams.push(`${encodeURIComponent(key)}%5B%5D=${encodeURIComponent(v)}`);
+      });
+    } else {
+      searchParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+    }
+  });
+
+  const fullUrl = `${url.origin}${url.pathname}?${searchParams.join('&')}`;
+
+  return decodeURIComponent(fullUrl);
+};
+
 export const encodeObjectAsUrlParam = (obj) => encodeURIComponent(JSON.stringify(obj));
 
 // ============================================================

@@ -24,6 +24,7 @@ const propertySchema = new Schema(
           'Immovlan',
           'Immoweb',
           'Latour & Petit',
+          'Myimmo',
           'Oralis',
           'Realo',
         ],
