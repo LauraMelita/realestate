@@ -1,17 +1,16 @@
 import SEARCH_CONFIG from '#config/search';
 import LATOUR_ET_PETIT_CONFIG from '#scrapers/latouretpetit/constants';
-import { generateHash } from '#utils/helpers';
+import { getCityFromPostalCode } from '#utils/helpers';
 
 export const formatData = (rawData) =>
-  rawData.map(({ id, pictures, price, zip, city, area, rooms, terrace, garden, url: pathname }) => {
+  rawData.map(({ id, pictures, price, zip, area, rooms, terrace, garden, url: pathname }) => {
     return {
-      hash: generateHash(`${LATOUR_ET_PETIT_CONFIG.title}-${id}`),
-      agency: LATOUR_ET_PETIT_CONFIG.title,
+      sourceId: id,
       type: SEARCH_CONFIG.category,
       image: pictures[0]?.urlLarge,
       price,
       zip,
-      city,
+      city: getCityFromPostalCode(+zip),
       surface: area,
       bedrooms: rooms,
       terrace: terrace === 1,

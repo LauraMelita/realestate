@@ -1,6 +1,6 @@
 import SEARCH_CONFIG from '#config/search';
 import ORALIS_CONFIG from '#scrapers/oralis/constants';
-import { generateHash } from '#utils/helpers';
+import { getCityFromPostalCode } from '#utils/helpers';
 
 const getId = (link) => link?.split('/').pop();
 
@@ -17,16 +17,15 @@ const formatSurface = (surface) => {
 
 export const formatData = (rawData) =>
   rawData.map(({ image, price, city, surface, bedrooms, link }) => {
-    const agency = ORALIS_CONFIG.title;
+    const postalCode = getPostalCode(city);
 
     return {
-      hash: generateHash(`${agency}-${getId(link)}`),
-      agency,
+      sourceId: getId(link),
       type: SEARCH_CONFIG.category,
       image,
       price: formatPrice(price),
-      zip: getPostalCode(city),
-      city,
+      zip: postalCode,
+      city: getCityFromPostalCode(postalCode),
       surface: formatSurface(surface),
       bedrooms: +bedrooms,
       terrace: null,

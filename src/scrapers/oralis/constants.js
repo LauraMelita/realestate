@@ -1,11 +1,10 @@
 const ORALIS_CONFIG = {
-  title: 'Oralis',
   baseUrl: 'https://www.oralis.be',
-  propertyType: {
+  propertyTypes: {
     house: 1,
     apartment: 2,
   },
-  listingType: {
+  listingTypes: {
     sale: 1,
     rent: 2,
   },

@@ -1,11 +1,10 @@
 const MYIMMO_CONFIG = {
-  title: 'Myimmo',
   baseUrl: 'https://www.myimmo.be',
-  propertyType: {
+  propertyTypes: {
     house: 1,
     apartment: 2,
   },
-  listingType: {
+  listingTypes: {
     sale: 'vente',
     rent: 'location',
   },

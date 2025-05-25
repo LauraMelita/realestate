@@ -14,7 +14,7 @@ const filterPayload = {
               should: [{ match: { 'address.countryCode': 'be' } }],
             },
           },
-          { match: { listingType: CENTURY_CONFIG.listingType[purpose] } },
+          { match: { listingType: CENTURY_CONFIG.listingTypes[purpose] } },
           { match: { type: category.toUpperCase() } },
           {
             bool: {

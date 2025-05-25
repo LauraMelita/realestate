@@ -2,7 +2,7 @@ import SEARCH_CONFIG from '#config/search';
 import IMMOWEB_CONFIG from '#scrapers/immoweb/constants';
 
 const propertyType = SEARCH_CONFIG.category;
-const listingType = IMMOWEB_CONFIG.listingType[SEARCH_CONFIG.purpose];
+const listingType = IMMOWEB_CONFIG.listingTypes[SEARCH_CONFIG.purpose];
 const postalCodes = `BE-${SEARCH_CONFIG.locations.map(({ postalCode }) => postalCode).join(',')}`; // e.g. 'BE-1030,1040,1060,1070,1081,1090,1160,1210'
 const gardenFeature = SEARCH_CONFIG.features.find(({ type }) => type === 'garden');
 const terraceFeature = SEARCH_CONFIG.features.find(({ type }) => type === 'terrace');

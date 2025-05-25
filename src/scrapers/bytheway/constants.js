@@ -1,7 +1,6 @@
 const BYTHEWAY_CONFIG = {
-  title: 'By the Way',
   apiUrl: 'https://bytheway.immo/wp-admin/admin-ajax.php',
-  propertyType: {
+  propertyTypes: {
     house: 'maison',
     apartment: 'appartement',
   },

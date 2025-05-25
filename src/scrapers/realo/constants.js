@@ -1,5 +1,4 @@
 const REALO_CONFIG = {
-  title: 'Realo',
   apiUrl: 'https://www.realo.be/fr/search/estates.json',
   baseUrl: 'https://www.realo.be',
   zipIds: {

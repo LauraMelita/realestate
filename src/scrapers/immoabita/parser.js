@@ -1,17 +1,16 @@
 import SEARCH_CONFIG from '#config/search';
 import IMMOABITA_CONFIG from '#scrapers/immoabita/constants';
-import { generateHash } from '#utils/helpers';
+import { getCityFromPostalCode } from '#utils/helpers';
 
 export const formatData = (rawData) =>
-  rawData.map(({ id, pictures, price, zip, city, minArea, rooms, terrace, garden }) => {
+  rawData.map(({ id, pictures, price, zip, minArea, rooms, terrace, garden }) => {
     return {
-      hash: generateHash(`${IMMOABITA_CONFIG.title}-${id}`),
-      agency: IMMOABITA_CONFIG.title,
+      sourceId: id,
       type: SEARCH_CONFIG.category,
       image: pictures[0].urlLarge,
       price,
       zip,
-      city,
+      city: getCityFromPostalCode(+zip),
       surface: minArea,
       bedrooms: rooms,
       terrace: terrace === 1,

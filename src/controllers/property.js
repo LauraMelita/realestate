@@ -1,5 +1,7 @@
 import Property from '#models/property';
 
+import { generateHash } from '#utils/helpers';
+
 export const getAllProperties = async (req, res, next) => {
   try {
     const properties = await Property.find();
@@ -14,19 +16,21 @@ export const getAllProperties = async (req, res, next) => {
   }
 };
 
-export const saveNewProperties = async (properties) => {
+export const saveNewProperties = async (properties, agency) => {
   if (!properties.length) return [];
 
-  // Get all hashes
-  const hashes = properties.map((prop) => prop.hash);
+  const enriched = properties.map((property) => ({
+    hash: generateHash(`${agency}_${property.sourceId}`),
+    agency,
+    ...property,
+  }));
 
-  // Find existing hashes in DB
+  // Deduplicate based on hash
+  const hashes = enriched.map((property) => property.hash);
   const existing = await Property.find({ hash: { $in: hashes } }).select('hash');
+  const existingHashes = new Set(existing.map((property) => property.hash));
+  const newProperties = enriched.filter((property) => !existingHashes.has(property.hash));
 
-  const existingHashes = new Set(existing.map((prop) => prop.hash));
-
-  // Filter only new properties
-  const newProperties = properties.filter((prop) => !existingHashes.has(prop.hash));
-
+  // Insert new properties
   return newProperties.length ? await Property.insertMany(newProperties) : [];
 };

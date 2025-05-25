@@ -1,6 +1,5 @@
 import SEARCH_CONFIG from '#config/search';
-import BYTHEWAY_CONFIG from '#scrapers/bytheway/constants';
-import { generateHash } from '#utils/helpers';
+import { getCityFromPostalCode } from '#utils/helpers';
 
 const extractId = (link) => {
   const match = link?.match(/\/bien\/(\d+)-/);
@@ -8,11 +7,12 @@ const extractId = (link) => {
   return match[1];
 };
 
-const formatPrice = (price) => parseInt(price.replace(/\D/g, ''), 10);
+const formatPrice = (price) => parseInt(price?.replace(/\D/g, ''), 10);
 
 const formatLocation = (location) => {
-  const locationString = location.split('|')[1]?.trim();
-  const [postalCode, city] = locationString.split(' ');
+  const locationString = location?.split('|')[1]?.trim();
+  const postalCode = +locationString?.split(' ')[0];
+  const city = getCityFromPostalCode(postalCode);
 
   return { postalCode, city };
 };
@@ -22,8 +22,7 @@ export const formatData = (rawData) => {
     const { postalCode, city } = formatLocation(location);
 
     return {
-      hash: generateHash(`${BYTHEWAY_CONFIG.title}-${extractId(link)}`),
-      agency: BYTHEWAY_CONFIG.title,
+      sourceId: extractId(link),
       type: SEARCH_CONFIG.category,
       image,
       price: formatPrice(price),

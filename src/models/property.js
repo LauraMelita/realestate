@@ -11,24 +11,14 @@ const propertySchema = new Schema(
       required: [true, 'A property must have a hash'],
     },
 
+    sourceId: {
+      type: String,
+      required: [true, 'A property must have a source ID'],
+    },
+
     agency: {
       type: String,
       required: [true, 'A property must have an agency'],
-      enum: {
-        values: [
-          'By the Way',
-          'Century 21',
-          'Era',
-          'Expertissimmo',
-          'Immoabita',
-          'Immovlan',
-          'Immoweb',
-          'Latour & Petit',
-          'Myimmo',
-          'Oralis',
-          'Realo',
-        ],
-      },
     },
 
     type: {
