@@ -1,6 +1,5 @@
 import SEARCH_CONFIG from '#config/search';
-import MYIMMO_CONFIG from '#scrapers/myimmo/constants';
-import { generateHash } from '#utils/helpers';
+import { getCityFromPostalCode } from '#utils/helpers';
 
 const getId = (link) => {
   const match = link?.match(/ref(\d+)/);
@@ -18,7 +17,7 @@ const formatAddress = (address) => {
 
   return {
     postalCode: +postalCode,
-    city: cityParts.join(' '),
+    city: getCityFromPostalCode(+postalCode),
   };
 };
 
@@ -28,12 +27,10 @@ const formatSurface = (surface) => {
 
 export const formatData = (rawData) =>
   rawData.map(({ image, price, address, surface, bedrooms, link }) => {
-    const agency = MYIMMO_CONFIG.title;
     const { postalCode, city } = formatAddress(address);
 
     return {
-      hash: generateHash(`${agency}-${getId(link)}`),
-      agency,
+      sourceId: getId(link),
       type: SEARCH_CONFIG.category,
       image,
       price: formatPrice(price),

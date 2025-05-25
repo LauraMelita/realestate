@@ -1,17 +1,15 @@
 const EXPERTISSIMMO_CONFIG = {
-  title: 'Expertissimmo',
-  apiUrl:
-    'https://expertissimmo.eu/fr/proxy/https://api.whise.eu/v1/estates/list/proxydata',
+  apiUrl: 'https://expertissimmo.eu/fr/proxy/https://api.whise.eu/v1/estates/list/proxydata',
   baseUrl: 'https://expertissimmo.eu/fr/nos-biens',
   slug: {
     sale: 'a-vendre',
     rent: 'a-louer',
   },
-  propertyType: {
+  propertyTypes: {
     house: 1,
     apartment: 2,
   },
-  listingType: {
+  listingTypes: {
     sale: 1,
     rent: 2,
   },

@@ -11,7 +11,7 @@ const params = {
   PageMaximum: 0,
   FirstPage: true,
   CanGetNextPage: false,
-  CMSListType: ORALIS_CONFIG.listingType[SEARCH_CONFIG.purpose],
+  CMSListType: ORALIS_CONFIG.listingTypes[SEARCH_CONFIG.purpose],
   SortParameter: 5,
   MaxItemsPerPage: 1000,
   PageNumber: 0,
@@ -22,7 +22,7 @@ const params = {
     { FieldName: 'CanHaveChildren', FieldValue: false },
     {
       FieldName: 'CategoryIDList',
-      FieldValue: [ORALIS_CONFIG.propertyType[SEARCH_CONFIG.category]],
+      FieldValue: [ORALIS_CONFIG.propertyTypes[SEARCH_CONFIG.category]],
     },
     { FieldName: 'ZipList', FieldValue: postalCodes },
     { FieldName: 'PriceRange', FieldValue: [0, SEARCH_CONFIG.maxPrice] },

@@ -16,93 +16,80 @@ const AGENCIES = [
   {
     name: 'bytheway',
     method: scrapeBytheway,
+    enabled: true,
     frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
     name: 'century',
     method: scrapeCentury,
+    enabled: true,
     frequency: '*/40 6-23 * * *', // Every 40 minutes from 06:00 to 23:59
     hasLinkPreview: false,
   },
   {
     name: 'era',
     method: scrapeEra,
+    enabled: true,
     frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
     name: 'expertissimo',
     method: scrapeExpertissimmo,
+    enabled: true,
     frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
     name: 'immoabita',
     method: scrapeImmoabita,
+    enabled: true,
     frequency: '*/26 6-23 * * *', // Every 26 minutes from 06:00 to 23:59
     hasLinkPreview: false,
   },
   {
     name: 'immovlan',
     method: scrapeImmovlan,
+    enabled: true,
     frequency: '*/30 6-23 * * *', // Every 30 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
     name: 'immoweb',
     method: scrapeImmoweb,
+    enabled: true,
     frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
     name: 'latouretpetit',
     method: scrapeLatourEtPetit,
+    enabled: true,
     frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
     hasLinkPreview: false,
   },
   {
     name: 'myimmo',
     method: scrapeMyimmo,
+    enabled: true,
     frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
     name: 'oralis',
     method: scrapeOralis,
+    enabled: true,
     frequency: '*/29 6-23 * * *', // Every 29 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
     name: 'realo',
     method: scrapeRealo,
+    enabled: true,
     frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
-  // {
-  //   name: 'revimmo',
-  //   method: null,
-  //   frequency: '*/28 6-23 * * *', // Every 28 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
-  // {
-  //   name: 'trior',
-  //   method: null,
-  //   frequency: '*/29 6-23 * * *', // Every 29 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
-  // {
-  //   name: 'viabilis',
-  //   method: null,
-  //   frequency: '*/22 6-23 * * *', // Every 22 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
-  // {
-  //   name: 'weinvest',
-  //   method: null,
-  //   frequency: '*/24 6-23 * * *', // Every 24 minutes from 06:00 to 23:59
-  //   hasLinkPreview: null,
-  // },
 ];
 
 export default AGENCIES;

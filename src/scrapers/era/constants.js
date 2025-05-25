@@ -1,8 +1,7 @@
 const ERA_CONFIG = {
-  title: 'Era',
   apiUrl: 'https://www.era.be/en/jsonapi/index/property_index',
   baseUrl: 'https://www.era.be',
-  propertyType: {
+  propertyTypes: {
     house: '46',
     apartment: '44',
   },

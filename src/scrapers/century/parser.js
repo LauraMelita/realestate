@@ -1,6 +1,6 @@
 import SEARCH_CONFIG from '#config/search';
 import CENTURY_CONFIG from '#scrapers/century/constants';
-import { generateHash } from '#utils/helpers';
+import { getCityFromPostalCode } from '#utils/helpers';
 
 const buildImageUrl = (id, images) => {
   if (!images?.length) return null;
@@ -20,7 +20,7 @@ const buildImageUrl = (id, images) => {
 const buildUrl = (address, id) => {
   const baseUrl = CENTURY_CONFIG.linkUrl;
   const slug = CENTURY_CONFIG.slug[SEARCH_CONFIG.purpose];
-  const propertyType = CENTURY_CONFIG.propertyType[SEARCH_CONFIG.category];
+  const propertyType = CENTURY_CONFIG.propertyTypes[SEARCH_CONFIG.category];
   const city = address.city.toLowerCase();
 
   return `${baseUrl}/${slug}/${propertyType}/${city}/${id}`;
@@ -28,14 +28,15 @@ const buildUrl = (address, id) => {
 
 export const formatData = (rawData) =>
   rawData.map(({ id, images, price, address, surface, rooms, amenities }) => {
+    const postalCode = +address?.postalCode;
+
     return {
-      hash: generateHash(`${CENTURY_CONFIG.title}-${id}`),
-      agency: CENTURY_CONFIG.title,
+      sourceId: id,
       type: SEARCH_CONFIG.category,
       image: buildImageUrl(id, images),
       price: price.amount,
-      zip: address.postalCode,
-      city: address.city,
+      zip: postalCode,
+      city: getCityFromPostalCode(postalCode),
       surface: surface.habitableSurfaceArea.value,
       bedrooms: rooms.numberOfBedrooms,
       terrace: amenities?.terrace === true,

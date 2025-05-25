@@ -1,9 +1,8 @@
 const IMMOWEB_CONFIG = {
-  title: 'Immoweb',
   baseUrl: 'https://www.immoweb.be',
   apiUrl: 'https://www.immoweb.be/en/search-results',
   linkUrl: 'https://www.immoweb.be/en/classified',
-  listingType: {
+  listingTypes: {
     sale: 'for-sale',
     rent: 'for-rent',
   },

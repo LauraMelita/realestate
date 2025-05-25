@@ -1,5 +1,4 @@
 const CENTURY_CONFIG = {
-  title: 'Century 21',
   apiUrl: 'https://api.prd.cloud.century21.be/api/v2/properties',
   linkUrl: 'https://www.century21.be/fr/properiete',
   imageUrl: 'https://images.century21.be',
@@ -7,11 +6,11 @@ const CENTURY_CONFIG = {
     sale: 'a-vendre',
     rent: 'a-louer',
   },
-  propertyType: {
+  propertyTypes: {
     house: 'maison',
     apartment: 'appartement',
   },
-  listingType: {
+  listingTypes: {
     sale: 'FOR_SALE',
     rent: 'FOR_RENT',
   },

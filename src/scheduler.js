@@ -7,7 +7,9 @@ import { saveNewProperties } from '#controllers/property';
 import { sendNotification } from '#services/telegram';
 
 const scheduler = () => {
-  AGENCIES.forEach(({ name, method: scraper, frequency, hasLinkPreview }) => {
+  AGENCIES.forEach(({ name, method: scraper, enabled, frequency, hasLinkPreview }) => {
+    if (!enabled) return;
+
     cron.schedule(frequency, async () => {
       try {
         logScraperStart(name);

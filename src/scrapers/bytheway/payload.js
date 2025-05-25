@@ -4,7 +4,7 @@ import SEARCH_CONFIG from '#config/search';
 import BYTHEWAY_CONFIG from '#scrapers/bytheway/constants';
 
 const zipIds = SEARCH_CONFIG.locations.map(({ postalCode }) => BYTHEWAY_CONFIG.zipIds[postalCode]);
-const category = BYTHEWAY_CONFIG.propertyType[SEARCH_CONFIG.category];
+const category = BYTHEWAY_CONFIG.propertyTypes[SEARCH_CONFIG.category];
 const priceRange = `0_${SEARCH_CONFIG.maxPrice}`;
 
 const params = {

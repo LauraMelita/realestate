@@ -1,8 +1,7 @@
 const LATOUR_ET_PETIT_CONFIG = {
-  title: 'Latour & Petit',
   apiUrl: 'https://latouretpetit.be/api/estates/sales',
   baseUrl: 'https://www.latouretpetit.com',
-  propertyType: {
+  propertyTypes: {
     house: '1',
     apartment: '2',
   },

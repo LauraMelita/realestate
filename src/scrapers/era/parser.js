@@ -1,10 +1,10 @@
 import SEARCH_CONFIG from '#config/search';
 import ERA_CONFIG from '#scrapers/era/constants';
-import { generateHash } from '#utils/helpers';
+import { getCityFromPostalCode } from '#utils/helpers';
 
 const formatAddress = (address) => {
   const [, postalCode, rawCity] = address.match(/,\s*(\d{4})\s+(.+)$/);
-  const city = rawCity.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  const city = getCityFromPostalCode(+postalCode);
 
   return { postalCode, city };
 };
@@ -32,8 +32,7 @@ export const formatData = (rawData) =>
     const { postalCode, city } = formatAddress(address);
 
     return {
-      hash: generateHash(`${ERA_CONFIG.title}-${id}`),
-      agency: ERA_CONFIG.title,
+      sourceId: id,
       type: SEARCH_CONFIG.category,
       image: `${ERA_CONFIG.baseUrl}${image}`,
       price: formatPrice(price),
