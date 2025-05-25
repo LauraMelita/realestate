@@ -22,9 +22,10 @@ export const scrapeImmoabita = async () => {
   const allRawResults = await fetchAllPages({
     url: IMMOABITA_CONFIG.apiUrl,
     method: 'POST',
-    baseParams: payload,
     contentType: 'x-www-form-urlencoded',
+    baseParams: payload,
     paginationField: 'pagenumber',
+    extractResults: (data) => data,
   });
 
   const refinedData = filterResults(allRawResults || []);

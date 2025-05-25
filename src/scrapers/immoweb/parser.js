@@ -1,56 +1,24 @@
 import SEARCH_CONFIG from '#config/search';
 import IMMOWEB_CONFIG from '#scrapers/immoweb/constants';
-import { generateHash } from '#utils/helpers';
-
-const formatPrice = (price) => {
-  return +price.split('\n')[0].replace(/[^\d]/g, '');
-};
-
-const formatDetails = (details) => {
-  const bedroomsMatch = details.match(/(?:-|\b)?\s*(\d+)\s*bdr/i);
-  const surfaceMatch = details.match(/(\d+)\s*m²/);
-
-  return {
-    bedrooms: bedroomsMatch ? +bedroomsMatch[1] : null,
-    surface: surfaceMatch ? +surfaceMatch[1] : null,
-  };
-};
-
-const formatLocality = (locality) => {
-  const [postalCode, ...rawCity] = locality.trim().split(' ');
-
-  const city = rawCity
-    .join(' ')
-    .toLowerCase()
-    .replace(/\b\w/g, (match) => match.toUpperCase());
-
-  return {
-    postalCode,
-    city,
-  };
-};
+import { generateHash, getCityFromPostalCode } from '#utils/helpers';
 
 export const formatData = (rawData) =>
-  rawData.map(({ image, price, locality, details, url }) => {
-    const { postalCode, city } = formatLocality(locality);
-    const { bedrooms, surface } = formatDetails(details);
-    const formattedPrice = formatPrice(price);
-    const agency = IMMOWEB_CONFIG.title;
-    const type = SEARCH_CONFIG.category;
-    const hashString = `${agency}-${type}-${formattedPrice}-${postalCode}-${city}-${surface}-${bedrooms}`;
+  rawData.map(({ id, media, price, property }) => {
+    const zipCode = +property.location?.postalCode;
+    const city = getCityFromPostalCode(zipCode);
 
     return {
-      hash: generateHash(hashString),
-      agency,
-      type,
-      image,
-      price: formattedPrice,
-      zip: postalCode,
+      hash: generateHash(`${IMMOWEB_CONFIG.title}-${id}`),
+      agency: IMMOWEB_CONFIG.title,
+      type: SEARCH_CONFIG.category,
+      image: media?.pictures?.[0]?.largeUrl,
+      price: price.mainValue,
+      zip: zipCode,
       city,
-      surface,
-      bedrooms,
-      garden: null, // TODO
-      terrace: null, // TODO
-      url,
+      surface: property.netHabitableSurface,
+      bedrooms: property.bedroomCount,
+      terrace: null, // The API does not provide terrace details
+      garden: null, // The API does not provide garden details
+      url: `${IMMOWEB_CONFIG.linkUrl}/${id}`,
     };
   });
