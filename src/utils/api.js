@@ -1,6 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 
+import { createUserAgent } from '#utils/helpers';
+
 const buildParams = (method, contentType, params) => {
   if (method === 'GET') return { params: params };
 
@@ -18,7 +20,14 @@ const buildParams = (method, contentType, params) => {
   }
 };
 
-export const fetchAllPages = async ({ url, method, baseParams, contentType, paginationField }) => {
+export const fetchAllPages = async ({
+  url,
+  method,
+  contentType,
+  baseParams,
+  paginationField,
+  extractResults,
+}) => {
   const allResults = [];
   let page = 1;
   let hasMore = true;
@@ -35,12 +44,13 @@ export const fetchAllPages = async ({ url, method, baseParams, contentType, pagi
       ...buildParams(method, contentType, paramsWithPagination),
       headers: {
         'Content-Type': `application/${contentType}`,
+        'User-Agent': createUserAgent(),
       },
     });
 
-    const results = rawData || [];
+    const results = extractResults(rawData) || [];
 
-    console.log(`Fetched ${results.length} items on page ${page}`);
+    console.log(`Retrieved ${results.length} items on page ${page}`);
 
     allResults.push(...results);
 
@@ -51,7 +61,7 @@ export const fetchAllPages = async ({ url, method, baseParams, contentType, pagi
     }
   }
 
-  console.log(`Fetched ${allResults.length} results in total`);
+  console.log(`Retrieved ${allResults.length} results in total`);
 
   return allResults;
 };
