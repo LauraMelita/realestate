@@ -128,8 +128,8 @@ cp .env.default .env
    https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates
    ```
 
-   > [!IMPORTANT]
-   > Replace `<YOUR_BOT_TOKEN>` with your actual bot token
+> [!IMPORTANT]
+> Replace `<YOUR_BOT_TOKEN>` with your actual bot token
 
 7. Send any message to your bot
 
