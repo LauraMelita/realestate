@@ -56,7 +56,7 @@ src/
 ## Installation
 
 > [!IMPORTANT]
-> Requires Node.js >= 20.6.0
+> Requires Node.js `>= 20.6.0`
 
 1. Clone the repository
 
