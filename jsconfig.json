@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
     "paths": {
-      "#app": ["app.js"],
-      "#scheduler": ["scheduler.js"],
-      "#config/*": ["config/*"],
-      "#controllers/*": ["controllers/*"],
-      "#middlewares/*": ["middlewares/*"],
-      "#models/*": ["models/*"],
-      "#routes/*": ["routes/*"],
-      "#scrapers/*": ["scrapers/*"],
-      "#services/*": ["services/*"],
-      "#utils/*": ["utils/*"]
+      "#app": ["./src/app.js"],
+      "#scheduler": ["./src/scheduler.js"],
+      "#config/*": ["./src/config/*"],
+      "#controllers/*": ["./src/controllers/*"],
+      "#middlewares/*": ["./src/middlewares/*"],
+      "#models/*": ["./src/models/*"],
+      "#routes/*": ["./src/routes/*"],
+      "#scrapers/*": ["./src/scrapers/*"],
+      "#services/*": ["./src/services/*"],
+      "#utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src"]
