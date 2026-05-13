@@ -14,6 +14,7 @@ import {
 const AGENCIES = [
   {
     name: 'century',
+    label: 'Century 21',
     method: scrapeCentury,
     enabled: true,
     frequency: '*/40 6-23 * * *', // Every 40 minutes from 06:00 to 23:59
@@ -21,6 +22,7 @@ const AGENCIES = [
   },
   {
     name: 'era',
+    label: 'ERA',
     method: scrapeEra,
     enabled: true,
     frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
@@ -28,6 +30,7 @@ const AGENCIES = [
   },
   {
     name: 'expertissimo',
+    label: 'Expertissimmo',
     method: scrapeExpertissimmo,
     enabled: true,
     frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
@@ -35,6 +38,7 @@ const AGENCIES = [
   },
   {
     name: 'immoabita',
+    label: 'Immo Abita',
     method: scrapeImmoabita,
     enabled: true,
     frequency: '*/26 6-23 * * *', // Every 26 minutes from 06:00 to 23:59
@@ -42,6 +46,7 @@ const AGENCIES = [
   },
   {
     name: 'immovlan',
+    label: 'Immovlan',
     method: scrapeImmovlan,
     enabled: true,
     frequency: '*/30 6-23 * * *', // Every 30 minutes from 06:00 to 23:59
@@ -49,6 +54,7 @@ const AGENCIES = [
   },
   {
     name: 'immoweb',
+    label: 'Immoweb',
     method: scrapeImmoweb,
     enabled: true,
     frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
@@ -56,6 +62,7 @@ const AGENCIES = [
   },
   {
     name: 'latouretpetit',
+    label: 'Latour & Petit',
     method: scrapeLatourEtPetit,
     enabled: true,
     frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
@@ -63,6 +70,7 @@ const AGENCIES = [
   },
   {
     name: 'myimmo',
+    label: 'My Immo',
     method: scrapeMyimmo,
     enabled: true,
     frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
@@ -70,6 +78,7 @@ const AGENCIES = [
   },
   {
     name: 'oralis',
+    label: 'Oralis',
     method: scrapeOralis,
     enabled: true,
     frequency: '*/29 6-23 * * *', // Every 29 minutes from 06:00 to 23:59
@@ -77,6 +86,7 @@ const AGENCIES = [
   },
   {
     name: 'realo',
+    label: 'Realo',
     method: scrapeRealo,
     enabled: true,
     frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59

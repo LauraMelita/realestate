@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
-
 import { isValueOrNull, nullify } from '#utils/helpers';
 
 const propertySchema = new Schema(
@@ -42,6 +41,35 @@ const propertySchema = new Schema(
       type: Number,
       validate: isValueOrNull('number', 'Price must be a number or null if unknown'),
       set: nullify('number'),
+      default: null,
+    },
+
+    peb: {
+      type: String,
+      enum: {
+        values: [
+          'A++',
+          'A+',
+          'A',
+          'A-',
+          'B+',
+          'B',
+          'B-',
+          'C+',
+          'C',
+          'C-',
+          'D+',
+          'D',
+          'D-',
+          'E+',
+          'E',
+          'E-',
+          'F',
+          'G',
+        ],
+        message: 'PEB score must be a valid score',
+      },
+      set: nullify('string'),
       default: null,
     },
 

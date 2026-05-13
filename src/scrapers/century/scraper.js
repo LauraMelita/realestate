@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import { endpoint } from '#scrapers/century/endpoint';
 import { formatData } from '#scrapers/century/parser';
 import { deduplicateByKeys } from '#utils/helpers';

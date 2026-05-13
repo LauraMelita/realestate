@@ -1,13 +1,11 @@
 import cron from 'node-cron';
-
-import { logScraperStart, logSaved, logError } from '#services/logger';
-
 import AGENCIES from '#config/agencies';
+import { logScraperStart, logSaved, logError } from '#services/logger';
 import { saveNewProperties } from '#controllers/property';
 import { sendNotification } from '#services/telegram';
 
 const scheduler = () => {
-  AGENCIES.forEach(({ name, method: scraper, enabled, frequency, hasLinkPreview }) => {
+  AGENCIES.forEach(({ name, label, method: scraper, enabled, frequency, hasLinkPreview }) => {
     if (!enabled) return;
 
     cron.schedule(frequency, async () => {
@@ -17,7 +15,9 @@ const scheduler = () => {
         const newProperties = await saveNewProperties(data, name);
         logSaved(name, newProperties.length);
 
-        if (newProperties.length) await sendNotification(newProperties, hasLinkPreview);
+        if (newProperties.length) {
+          await sendNotification(newProperties, { hasLinkPreview, agencyLabel: label });
+        }
       } catch (error) {
         logError(`Error running scraper for ${name}:`, error.message);
       }
