@@ -1,6 +1,6 @@
 import SEARCH_CONFIG from '#config/search';
 import CENTURY_CONFIG from '#scrapers/century/constants';
-import { getCityFromPostalCode } from '#utils/helpers';
+import { slugify, getCityFromPostalCode } from '#utils/helpers';
 
 const buildImageUrl = (id, images) => {
   if (!images?.length) return null;
@@ -21,13 +21,13 @@ const buildUrl = (address, id) => {
   const baseUrl = CENTURY_CONFIG.linkUrl;
   const slug = CENTURY_CONFIG.slug[SEARCH_CONFIG.purpose];
   const propertyType = CENTURY_CONFIG.propertyTypes[SEARCH_CONFIG.category];
-  const city = address.city.toLowerCase();
+  const city = slugify(address.city);
 
   return `${baseUrl}/${slug}/${propertyType}/${city}/${id}`;
 };
 
 export const formatData = (rawData) =>
-  rawData.map(({ id, images, price, address, surface, rooms, amenities }) => {
+  rawData.map(({ id, images, price, energySpecifications, address, surface, rooms, amenities }) => {
     const postalCode = +address?.postalCode;
 
     return {
@@ -35,6 +35,7 @@ export const formatData = (rawData) =>
       type: SEARCH_CONFIG.category,
       image: buildImageUrl(id, images),
       price: price.amount,
+      peb: energySpecifications?.energyLabel ?? null,
       zip: postalCode,
       city: getCityFromPostalCode(postalCode),
       surface: surface.habitableSurfaceArea.value,

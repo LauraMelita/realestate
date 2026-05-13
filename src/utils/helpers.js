@@ -99,6 +99,16 @@ export const deduplicateByKeys = (arr, keys) =>
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
+export const slugify = (value) =>
+  value
+    ?.toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+
 // ============================================================
 // DATE
 // ============================================================

@@ -5,38 +5,27 @@ import { logError } from '#services/logger';
 
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-const sendLinkPreview = async (property) => {
+export const sendNotification = async (data, { hasLinkPreview, agencyLabel }) => {
   try {
-    const message = `<a href="${property.url}">${capitalize(property.type)} — ${property.agency}</a>`;
+    for (const { type, city, zip, surface, bedrooms, peb, price, url, image } of data) {
+      const title = `[NEW] ${capitalize(type)} | ${agencyLabel}`;
+      const location = `📍 ${city} (${zip})`;
 
-    await bot.sendMessage(CHAT_ID, message, {
-      parse_mode: 'HTML',
-    });
-  } catch (error) {
-    throw new Error(`Failed to send link preview for property: ${property.hash}`);
-  }
-};
+      const details = [
+        surface ? `${surface}m²` : null,
+        bedrooms ? `${bedrooms} bdr` : null,
+        peb ? `PEB ${peb}` : null,
+        price ? formatPrice(price) : null,
+      ]
+        .filter(Boolean)
+        .join(' · ');
 
-const sendPhotoPreview = async (property) => {
-  try {
-    const caption = `<a href="${property.url}">${capitalize(property.type)} — ${property.agency}</a>\n${property.city} (${property.zip})\n${property.surface}m² · ${property.bedrooms} bdr. · ${formatPrice(property.price)}`;
+      const message = [title, location, details].filter(Boolean).join('\n');
 
-    await bot.sendPhoto(CHAT_ID, property.image, {
-      caption,
-      parse_mode: 'HTML',
-    });
-  } catch (error) {
-    throw new Error(`Failed to send photo preview for property: ${property.hash}`);
-  }
-};
-
-export const sendNotification = async (data, hasLinkPreview) => {
-  try {
-    for (const newListing of data) {
-      if (hasLinkPreview) {
-        await sendLinkPreview(newListing);
+      if (hasLinkPreview || !image) {
+        await bot.sendMessage(CHAT_ID, `${message}\n\n${url}`, { disable_web_page_preview: false });
       } else {
-        await sendPhotoPreview(newListing);
+        await bot.sendPhoto(CHAT_ID, image, { caption: `${message}\n\n${url}` });
       }
     }
   } catch (error) {
