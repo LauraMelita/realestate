@@ -1,4 +1,3 @@
-export { scrapeBytheway } from '#scrapers/bytheway/scraper';
 export { scrapeCentury } from '#scrapers/century/scraper';
 export { scrapeEra } from '#scrapers/era/scraper';
 export { scrapeExpertissimmo } from '#scrapers/expertissimmo/scraper';

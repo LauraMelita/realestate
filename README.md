@@ -26,7 +26,6 @@ The scraper continuously monitors supported websites, stores newly discovered li
 
 ## Supported Websites
 
-- [By The Way](https://bytheway.immo/)
 - [Century 21](https://www.century21.be/)
 - [ERA](https://www.era.be/)
 - [Expertissimmo](https://www.expertissimmo.eu/)
