@@ -12,7 +12,7 @@ export const formatData = (rawData) =>
     price,
     peb: energyClass ?? null,
     zip,
-    city: getCityFromPostalCode(+zip),
+    city: getCityFromPostalCode(zip),
     surface: minArea,
     bedrooms: rooms,
     terrace: terrace === 1,
