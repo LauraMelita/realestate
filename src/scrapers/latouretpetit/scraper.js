@@ -1,18 +1,16 @@
 import axios from 'axios';
-
 import SEARCH_CONFIG from '#config/search';
 import LATOUR_ET_PETIT_CONFIG from '#scrapers/latouretpetit/constants';
 import { payload } from '#scrapers/latouretpetit/payload';
 import { formatData } from '#scrapers/latouretpetit/parser';
+import { writeFile } from '#utils/helpers';
 
 const filterResults = (data) =>
   data.filter((item) => {
-    return SEARCH_CONFIG.features.some(({ type }) => {
-      if (type === 'garden') return item.garden === 1;
-      if (type === 'terrace') return item.terrace === 1;
+    const matchesGardenFilter = SEARCH_CONFIG.features.includes('garden') && item.garden === 1;
+    const matchesTerraceFilter = SEARCH_CONFIG.features.includes('terrace') && item.terrace === 1;
 
-      return false;
-    });
+    return matchesGardenFilter || matchesTerraceFilter;
   });
 
 export const scrapeLatourEtPetit = async () => {
@@ -23,6 +21,8 @@ export const scrapeLatourEtPetit = async () => {
   });
 
   const refinedData = filterResults(data?.estates || []);
+
+  await writeFile('latouretpetit.json', refinedData);
 
   return formatData(refinedData);
 };

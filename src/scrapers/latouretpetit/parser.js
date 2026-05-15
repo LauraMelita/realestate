@@ -1,16 +1,16 @@
-import SEARCH_CONFIG from '#config/search';
 import LATOUR_ET_PETIT_CONFIG from '#scrapers/latouretpetit/constants';
 import { getCityFromPostalCode } from '#utils/helpers';
 
 export const formatData = (rawData) =>
-  rawData.map(({ id, pictures, price, zip, area, rooms, terrace, garden, url: pathname }) => {
+  rawData.map(({ id, pictures, price, energyClass, zip, area, rooms, terrace, garden, url: pathname }) => {
     return {
       sourceId: id,
-      type: SEARCH_CONFIG.category,
+      type: 'apartment',
       image: pictures[0]?.urlLarge,
       price,
+      peb: energyClass ?? null,
       zip,
-      city: getCityFromPostalCode(+zip),
+      city: getCityFromPostalCode(zip),
       surface: area,
       bedrooms: rooms,
       terrace: terrace === 1,
