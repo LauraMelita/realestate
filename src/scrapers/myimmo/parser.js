@@ -1,4 +1,3 @@
-import SEARCH_CONFIG from '#config/search';
 import { getCityFromPostalCode } from '#utils/helpers';
 
 const getId = (link) => {
@@ -7,8 +6,12 @@ const getId = (link) => {
   return match ? match[1] : null;
 };
 
-const formatPrice = (price) => {
-  return parseInt(price?.replace(/[^\d]/g, ''), 10);
+const formatPrice = (price) => parseInt(price?.replace(/[^\d]/g, ''), 10) || null;
+
+const formatPeb = (pebUrl) => {
+  const pebMatch = pebUrl?.match(/peb_([a-g][+-]?)/i);
+
+  return pebMatch ? pebMatch[1].toUpperCase() : null;
 };
 
 const formatAddress = (address) => {
@@ -16,8 +19,8 @@ const formatAddress = (address) => {
   const [postalCode, ...cityParts] = addressParts.split(' ');
 
   return {
-    postalCode: +postalCode,
-    city: getCityFromPostalCode(+postalCode),
+    postalCode: postalCode,
+    city: getCityFromPostalCode(postalCode),
   };
 };
 
@@ -26,18 +29,19 @@ const formatSurface = (surface) => {
 };
 
 export const formatData = (rawData) =>
-  rawData.map(({ image, price, address, surface, bedrooms, link }) => {
+  rawData.map(({ image, price, peb, address, surface, bedrooms, link }) => {
     const { postalCode, city } = formatAddress(address);
 
     return {
       sourceId: getId(link),
-      type: SEARCH_CONFIG.category,
+      type: 'apartment',
       image,
       price: formatPrice(price),
+      peb: formatPeb(peb),
       zip: postalCode,
       city,
       surface: formatSurface(surface),
-      bedrooms: +bedrooms,
+      bedrooms,
       terrace: null,
       garden: null,
       url: link,
