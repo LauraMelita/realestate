@@ -1,8 +1,7 @@
 import fs from 'fs/promises';
 import UserAgent from 'user-agents';
 import crypto from 'crypto';
-
-import SEARCH_CONFIG from '#config/search';
+import { POSTAL_CODE_CITY_MAP } from '#utils/constants';
 
 // ============================================================
 // REQUEST
@@ -134,23 +133,14 @@ export const humanDateTime = () => {
 
 export const generateHash = (url) => crypto.createHash('md5').update(url).digest('hex');
 
-export const formatPrice = (price) =>
-  price ? `€${price.toLocaleString('en-US')}` : 'price on demand';
+export const formatPrice = (price) => (price ? `€${price.toLocaleString('en-US')}` : 'price on demand');
 
-export const getCityFromPostalCode = (postalCode) => {
-  const matchedLocation = SEARCH_CONFIG.locations.find(
-    (location) => location.postalCode === postalCode
-  );
-
-  return matchedLocation?.city || null;
-};
+export const getCityFromPostalCode = (postalCode) => POSTAL_CODE_CITY_MAP[+postalCode] ?? null;
 
 export const generateMapsUrl = (address, city, zip) => {
   const fullAddress = `${address}, ${city} ${zip}`;
 
-  return address && city && zip
-    ? `https://www.google.com/maps?q=${encodeURIComponent(fullAddress)}`
-    : null;
+  return address && city && zip ? `https://www.google.com/maps?q=${encodeURIComponent(fullAddress)}` : null;
 };
 
 // ============================================================

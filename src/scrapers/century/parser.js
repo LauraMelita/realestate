@@ -24,16 +24,14 @@ const buildUrl = (address, id) => {
 
 export const formatData = (rawData) =>
   rawData.map(({ id, images, price, energySpecifications, address, surface, rooms, amenities }) => {
-    const postalCode = +address?.postalCode;
-
     return {
       sourceId: id,
       type: 'apartment',
       image: buildImageUrl(id, images),
       price: price.amount,
       peb: energySpecifications?.energyLabel ?? null,
-      zip: postalCode,
-      city: getCityFromPostalCode(postalCode),
+      zip: address?.postalCode,
+      city: getCityFromPostalCode(address?.postalCode),
       surface: surface.habitableSurfaceArea.value,
       bedrooms: rooms.numberOfBedrooms,
       terrace: amenities?.terrace === true,

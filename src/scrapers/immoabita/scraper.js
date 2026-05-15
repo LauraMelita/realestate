@@ -6,16 +6,11 @@ import { fetchAllPages } from '#utils/api';
 
 const filterResults = (data) =>
   data.filter((item) => {
-    const matchesFeatures = SEARCH_CONFIG.features.some(({ type }) => {
-      if (type === 'garden') return item.garden === 1;
-      if (type === 'terrace') return item.terrace === 1;
-      return false;
-    });
+    const matchesGardenFilter = SEARCH_CONFIG.features.includes('garden') && item.garden === 1;
+    const matchesTerraceFilter = SEARCH_CONFIG.features.includes('terrace') && item.terrace === 1;
+    const matchesSurfaceFilter = item.minArea >= SEARCH_CONFIG.minSurface; // API param for surface unknown
 
-    // Filter surface manually (API param for surface unknown)
-    const matchesSurface = item.minArea >= SEARCH_CONFIG.minSurface;
-
-    return matchesFeatures && matchesSurface;
+    return (matchesGardenFilter || matchesTerraceFilter) && matchesSurfaceFilter;
   });
 
 export const scrapeImmoabita = async () => {
