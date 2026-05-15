@@ -31,7 +31,6 @@ The scraper continuously monitors supported websites, stores newly discovered li
 - [Expertissimmo](https://www.expertissimmo.eu/)
 - [Immo Abita](https://www.immoabita.be/)
 - [Immovlan](https://www.immovlan.be/)
-- [Immoweb](https://www.immoweb.be/)
 - [Latour & Petit](https://www.latouretpetit.be/)
 - [MyImmo](https://www.myimmo.be/)
 - [Oralis](https://www.oralis.be/)
