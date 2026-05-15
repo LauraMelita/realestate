@@ -5,8 +5,8 @@ const filters = {
   Filter: {
     LanguageId: 'fr-BE',
     ShowDetails: true,
-    CategoryIds: [EXPERTISSIMMO_CONFIG.propertyTypes[SEARCH_CONFIG.category]],
-    PurposeIds: [EXPERTISSIMMO_CONFIG.listingTypes[SEARCH_CONFIG.purpose]],
+    CategoryIds: [2], // apartment
+    PurposeIds: [1], // sale
     PurposeStatusIds: EXPERTISSIMMO_CONFIG.status,
     ZipCodes: SEARCH_CONFIG.locations.map(({ postalCode }) => postalCode),
     PriceRange: {
