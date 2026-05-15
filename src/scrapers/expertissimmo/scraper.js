@@ -1,17 +1,14 @@
 import axios from 'axios';
-
 import SEARCH_CONFIG from '#config/search';
 import { endpoint } from '#scrapers/expertissimmo/endpoint';
 import { formatData } from '#scrapers/expertissimmo/parser';
 
 const filterResults = (data) =>
   data.filter((item) => {
-    return SEARCH_CONFIG.features.some(({ type }) => {
-      if (type === 'garden') return item.garden === 1;
-      if (type === 'terrace') return item.terrace === 1;
+    const hasGarden = SEARCH_CONFIG.features.includes('garden') && item.garden === 1;
+    const hasTerrace = SEARCH_CONFIG.features.includes('terrace') && item.terrace === 1;
 
-      return false;
-    });
+    return hasGarden || hasTerrace;
   });
 
 export const scrapeExpertissimmo = async () => {
