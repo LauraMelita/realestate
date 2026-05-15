@@ -42,6 +42,7 @@ export const formatData = (rawData) =>
       type: 'apartment',
       image: `${ERA_CONFIG.baseUrl}${image}`,
       price: formatPrice(price),
+      peb: null,
       zip: postalCode,
       city,
       surface: formatSurface(surface),
