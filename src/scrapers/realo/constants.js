@@ -1,5 +1,5 @@
 const REALO_CONFIG = {
-  apiUrl: 'https://www.realo.be/fr/search/estates.json',
+  apiUrl: 'https://www.realo.be/en/search/estates.json',
   baseUrl: 'https://www.realo.be',
   zipIds: {
     1030: 5758985, // Schaerbeek
@@ -13,6 +13,10 @@ const REALO_CONFIG = {
     1090: 5194014, // Jette
     1160: 5758999, // Auderghem
     1210: 5759004, // Saint-Josse-ten-Noode
+  },
+  amenities: {
+    terrace: 'HAS_TERRACE',
+    garden: 'HAS_GARDEN',
   },
 };
 
