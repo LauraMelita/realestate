@@ -33,7 +33,6 @@ The scraper continuously monitors supported websites, stores newly discovered li
 - [Immovlan](https://www.immovlan.be/)
 - [Latour & Petit](https://www.latouretpetit.be/)
 - [MyImmo](https://www.myimmo.be/)
-- [Oralis](https://www.oralis.be/)
 - [Realo](https://www.realo.be/)
 
 ## Project Structure

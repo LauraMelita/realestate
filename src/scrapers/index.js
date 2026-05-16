@@ -5,5 +5,4 @@ export { scrapeImmoabita } from '#scrapers/immoabita/scraper';
 export { scrapeImmovlan } from '#scrapers/immovlan/scraper';
 export { scrapeLatourEtPetit } from '#scrapers/latouretpetit/scraper';
 export { scrapeMyimmo } from '#scrapers/myimmo/scraper';
-export { scrapeOralis } from '#scrapers/oralis/scraper';
 export { scrapeRealo } from '#scrapers/realo/scraper';
