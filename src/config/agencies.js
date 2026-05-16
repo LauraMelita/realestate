@@ -15,7 +15,7 @@ const AGENCIES = [
     label: 'Century 21',
     method: scrapeCentury,
     enabled: true,
-    frequency: '*/40 6-23 * * *', // Every 40 minutes from 06:00 to 23:59
+    frequency: '3,53 6-23 * * *', // Runs at minute 03 and 53 every hour from 06:00 to 23:59
     hasLinkPreview: false,
   },
   {
@@ -23,7 +23,7 @@ const AGENCIES = [
     label: 'ERA',
     method: scrapeEra,
     enabled: true,
-    frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
+    frequency: '8,43 6-23 * * *', // Runs at minute 08 and 43 every hour from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
@@ -31,7 +31,7 @@ const AGENCIES = [
     label: 'Expertissimmo',
     method: scrapeExpertissimmo,
     enabled: true,
-    frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
+    frequency: '14,54 6-23 * * *', // Runs at minute 14 and 54 every hour from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
@@ -39,7 +39,7 @@ const AGENCIES = [
     label: 'Immo Abita',
     method: scrapeImmoabita,
     enabled: true,
-    frequency: '*/26 6-23 * * *', // Every 26 minutes from 06:00 to 23:59
+    frequency: '21 6-23 * * *', // Runs at minute 21 every hour from 06:00 to 23:59
     hasLinkPreview: false,
   },
   {
@@ -47,7 +47,7 @@ const AGENCIES = [
     label: 'Immovlan',
     method: scrapeImmovlan,
     enabled: true,
-    frequency: '*/30 6-23 * * *', // Every 30 minutes from 06:00 to 23:59
+    frequency: '27 6-23 * * *', // Runs at minute 27 every hour from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
@@ -55,7 +55,7 @@ const AGENCIES = [
     label: 'Latour & Petit',
     method: scrapeLatourEtPetit,
     enabled: true,
-    frequency: '*/23 6-23 * * *', // Every 23 minutes from 06:00 to 23:59
+    frequency: '33 6-23 * * *', // Runs at minute 33 every hour from 06:00 to 23:59
     hasLinkPreview: false,
   },
   {
@@ -63,7 +63,7 @@ const AGENCIES = [
     label: 'My Immo',
     method: scrapeMyimmo,
     enabled: true,
-    frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
+    frequency: '39 6-23 * * *', // Runs at minute 39 every hour from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
@@ -71,7 +71,7 @@ const AGENCIES = [
     label: 'Realo',
     method: scrapeRealo,
     enabled: true,
-    frequency: '*/20 6-23 * * *', // Every 20 minutes from 06:00 to 23:59
+    frequency: '47 6-23 * * *', // Runs at minute 47 every hour from 06:00 to 23:59
     hasLinkPreview: true,
   },
 ];
