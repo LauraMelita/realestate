@@ -6,7 +6,6 @@ import {
   scrapeImmovlan,
   scrapeLatourEtPetit,
   scrapeMyimmo,
-  scrapeOralis,
   scrapeRealo,
 } from '#scrapers/index';
 
@@ -65,14 +64,6 @@ const AGENCIES = [
     method: scrapeMyimmo,
     enabled: true,
     frequency: '*/25 6-23 * * *', // Every 25 minutes from 06:00 to 23:59
-    hasLinkPreview: true,
-  },
-  {
-    name: 'oralis',
-    label: 'Oralis',
-    method: scrapeOralis,
-    enabled: true,
-    frequency: '*/29 6-23 * * *', // Every 29 minutes from 06:00 to 23:59
     hasLinkPreview: true,
   },
   {
