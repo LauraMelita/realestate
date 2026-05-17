@@ -47,26 +47,7 @@ const propertySchema = new Schema(
     peb: {
       type: String,
       enum: {
-        values: [
-          'A++',
-          'A+',
-          'A',
-          'A-',
-          'B+',
-          'B',
-          'B-',
-          'C+',
-          'C',
-          'C-',
-          'D+',
-          'D',
-          'D-',
-          'E+',
-          'E',
-          'E-',
-          'F',
-          'G',
-        ],
+        values: ['A++', 'A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'E+', 'E', 'E-', 'F', 'G'],
         message: 'PEB score must be a valid score',
       },
       set: nullify('string'),
@@ -81,6 +62,12 @@ const propertySchema = new Schema(
     city: {
       type: String,
       required: [true, 'A property must have a city'],
+    },
+
+    address: {
+      type: String,
+      set: nullify('string'),
+      default: null,
     },
 
     surface: {

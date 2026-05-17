@@ -16,8 +16,18 @@ const buildImageUrl = (id, images) => {
   return `${CENTURY_CONFIG.imageUrl}/${encoded}`;
 };
 
+const buildAddress = (street, number) => {
+  if (!street) return null;
+
+  if (!number) return street.trim();
+
+  const normalizedStreet = street.replace(/\s+\d+[A-Za-z]*\s*$/, '').trim();
+
+  return `${normalizedStreet} ${number}`;
+};
+
 const buildUrl = (address, id) => {
-  const city = slugify(address.city);
+  const city = slugify(address?.city);
 
   return `${CENTURY_CONFIG.linkUrl}/a-vendre/appartement/${city}/${id}`;
 };
@@ -32,6 +42,7 @@ export const formatData = (rawData) =>
       peb: energySpecifications?.energyLabel ?? null,
       zip: address?.postalCode,
       city: getCityFromPostalCode(address?.postalCode),
+      address: buildAddress(address?.street, address?.number),
       surface: surface.habitableSurfaceArea.value,
       bedrooms: rooms.numberOfBedrooms,
       terrace: amenities?.terrace === true,
