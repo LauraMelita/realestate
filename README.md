@@ -29,7 +29,6 @@ The scraper continuously monitors supported websites, stores newly discovered li
 - [Century 21](https://www.century21.be/)
 - [ERA](https://www.era.be/)
 - [Expertissimmo](https://www.expertissimmo.eu/)
-- [Immo Abita](https://www.immoabita.be/)
 - [Immovlan](https://www.immovlan.be/)
 - [Latour & Petit](https://www.latouretpetit.be/)
 - [MyImmo](https://www.myimmo.be/)
