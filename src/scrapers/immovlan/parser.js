@@ -37,8 +37,9 @@ export const formatData = (rawData) =>
       peb: getPeb(energyConsumptionGroupCssClass),
       zip: displayZipCode,
       city: getCityFromPostalCode(displayZipCode),
+      address: null, // Immovlan does not reliably expose addresses
       surface: getSurface(highLights),
-      bedrooms: structuredData.numberOfBedrooms || null,
+      bedrooms: structuredData?.numberOfBedrooms || null,
       terrace: hasFeature(tags, 'terrace'),
       garden: hasFeature(tags, 'garden'),
       url: displayUrl,

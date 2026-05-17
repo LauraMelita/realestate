@@ -15,11 +15,12 @@ const formatPeb = (pebUrl) => {
 };
 
 const formatAddress = (address) => {
-  const [, addressParts = ''] = address?.split('\n');
-  const [postalCode, ...cityParts] = addressParts.split(' ');
+  const [street = '', addressParts = ''] = address?.split('\n') || [];
+  const [postalCode] = addressParts.trim().split(' ');
 
   return {
-    postalCode: postalCode,
+    street: street.trim() || null,
+    postalCode: postalCode || null,
     city: getCityFromPostalCode(postalCode),
   };
 };
@@ -30,7 +31,7 @@ const formatSurface = (surface) => {
 
 export const formatData = (rawData) =>
   rawData.map(({ image, price, peb, address, surface, bedrooms, link }) => {
-    const { postalCode, city } = formatAddress(address);
+    const { street, postalCode, city } = formatAddress(address);
 
     return {
       sourceId: getId(link),
@@ -40,6 +41,7 @@ export const formatData = (rawData) =>
       peb: formatPeb(peb),
       zip: postalCode,
       city,
+      address: street,
       surface: formatSurface(surface),
       bedrooms,
       terrace: null,

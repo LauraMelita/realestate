@@ -1,17 +1,15 @@
-import SEARCH_CONFIG from '#config/search';
 import ERA_CONFIG from '#scrapers/era/constants';
 import { getCityFromPostalCode } from '#utils/helpers';
 
-const formatAddress = (address, link) => {
-  const postalCode = +address?.match(/\b\d{4}\b/)?.[0];
+const formatAddress = (address) => {
+  const [street, location] = address?.split(',').map((part) => part.trim()) ?? [];
 
-  if (postalCode) return { postalCode, city: getCityFromPostalCode(postalCode) };
-
-  const fallbackLocation = SEARCH_CONFIG.locations.find(({ city }) => link?.toLowerCase().includes(city.toLowerCase()));
+  const postalCode = +location?.match(/\b\d{4}\b/)?.[0];
 
   return {
-    postalCode: fallbackLocation?.postalCode ?? null,
-    city: fallbackLocation?.city ?? null,
+    street: street || null,
+    postalCode: postalCode || null,
+    city: postalCode ? getCityFromPostalCode(postalCode) : null,
   };
 };
 
@@ -35,7 +33,7 @@ const formatBedrooms = (bedrooms) => {
 
 export const formatData = (rawData) =>
   rawData.map(({ id, image, price, address, surface, bedrooms, link }) => {
-    const { postalCode, city } = formatAddress(address, link);
+    const { street, postalCode, city } = formatAddress(address);
 
     return {
       sourceId: id,
@@ -45,6 +43,7 @@ export const formatData = (rawData) =>
       peb: null,
       zip: postalCode,
       city,
+      address: street,
       surface: formatSurface(surface),
       bedrooms: formatBedrooms(bedrooms),
       terrace: null,
