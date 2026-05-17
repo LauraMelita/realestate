@@ -2,7 +2,6 @@ import {
   scrapeCentury,
   scrapeEra,
   scrapeExpertissimmo,
-  scrapeImmoabita,
   scrapeImmovlan,
   scrapeLatourEtPetit,
   scrapeMyimmo,
@@ -33,14 +32,6 @@ const AGENCIES = [
     enabled: true,
     frequency: '14,54 6-23 * * *', // Runs at minute 14 and 54 every hour from 06:00 to 23:59
     hasLinkPreview: true,
-  },
-  {
-    name: 'immoabita',
-    label: 'Immo Abita',
-    method: scrapeImmoabita,
-    enabled: true,
-    frequency: '21 6-23 * * *', // Runs at minute 21 every hour from 06:00 to 23:59
-    hasLinkPreview: false,
   },
   {
     name: 'immovlan',
