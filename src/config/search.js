@@ -1,5 +1,6 @@
 const SEARCH_CONFIG = {
   locations: [
+    { postalCode: 1040, city: 'Etterbeek' },
     { postalCode: 1080, city: 'Molenbeek-Saint-Jean' },
     { postalCode: 1081, city: 'Koekelberg' },
     { postalCode: 1082, city: 'Berchem-Sainte-Agathe' },
