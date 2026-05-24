@@ -5,3 +5,4 @@ export { scrapeImmovlan } from '#scrapers/immovlan/scraper';
 export { scrapeLatourEtPetit } from '#scrapers/latouretpetit/scraper';
 export { scrapeMyimmo } from '#scrapers/myimmo/scraper';
 export { scrapeRealo } from '#scrapers/realo/scraper';
+export { scrapeWeinvest } from '#scrapers/weinvest/scraper';

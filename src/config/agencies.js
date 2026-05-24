@@ -6,6 +6,7 @@ import {
   scrapeLatourEtPetit,
   scrapeMyimmo,
   scrapeRealo,
+  scrapeWeinvest,
 } from '#scrapers/index';
 
 const AGENCIES = [
@@ -63,6 +64,14 @@ const AGENCIES = [
     method: scrapeRealo,
     enabled: true,
     frequency: '47 6-23 * * *', // Runs at minute 47 every hour from 06:00 to 23:59
+    hasLinkPreview: true,
+  },
+  {
+    name: 'weinvest',
+    label: 'We Invest',
+    method: scrapeWeinvest,
+    enabled: true,
+    frequency: '21,59 6-23 * * *', // Runs at minute 21 and 59 every hour from 06:00 to 23:59
     hasLinkPreview: true,
   },
 ];
