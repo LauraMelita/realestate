@@ -1,7 +1,8 @@
 import bot from '#config/bot';
 import { logError } from '#services/logger';
-import { formatPrice, generateMapsUrl } from '#utils/helpers';
+import { formatPrice, generateMapsUrl, sleep } from '#utils/helpers';
 
+const MESSAGE_DELAY = 500;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 export const sendNotification = async (data, { hasLinkPreview, agencyLabel }) => {
@@ -25,6 +26,8 @@ export const sendNotification = async (data, { hasLinkPreview, agencyLabel }) =>
       } else {
         await bot.sendPhoto(CHAT_ID, image, { caption: message, parse_mode: 'HTML' });
       }
+
+      await sleep(MESSAGE_DELAY);
     }
   } catch (error) {
     logError('Failed to send Telegram message:', error.message);
