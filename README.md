@@ -33,6 +33,7 @@ The scraper continuously monitors supported websites, stores newly discovered li
 - [Latour & Petit](https://www.latouretpetit.be/)
 - [MyImmo](https://www.myimmo.be/)
 - [Realo](https://www.realo.be/)
+- [We Invest](https://weinvest.be/)
 
 ## Project Structure
 
