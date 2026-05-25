@@ -65,6 +65,12 @@ export const buildPHPSearchUrl = (baseUrl, params = {}) => {
 export const encodeObjectAsUrlParam = (obj) => encodeURIComponent(JSON.stringify(obj));
 
 // ============================================================
+// TIMING
+// ============================================================
+
+export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// ============================================================
 // ARRAY
 // ============================================================
 
