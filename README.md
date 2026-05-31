@@ -170,5 +170,3 @@ Returns all scraped properties stored in MongoDB
 
 Example:
 `http://localhost:5000/properties`
-
-test
