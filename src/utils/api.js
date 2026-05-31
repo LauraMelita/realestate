@@ -1,6 +1,5 @@
 import axios from 'axios';
 import qs from 'qs';
-
 import { createUserAgent } from '#utils/helpers';
 
 const buildParams = (method, contentType, params) => {
@@ -20,14 +19,7 @@ const buildParams = (method, contentType, params) => {
   }
 };
 
-export const fetchAllPages = async ({
-  url,
-  method,
-  contentType,
-  baseParams,
-  paginationField,
-  extractResults,
-}) => {
+export const fetchAllPages = async ({ url, method, contentType, baseParams, paginationField, extractResults }) => {
   const allResults = [];
   let page = 1;
   let hasMore = true;

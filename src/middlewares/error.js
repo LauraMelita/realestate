@@ -1,12 +1,6 @@
 import { isHttpError } from 'http-errors';
 import { isAxiosError } from 'axios';
-
-import {
-  handleAxiosError,
-  handleDBInvalidValue,
-  handleDBDuplicateFields,
-  handleDBValidationError,
-} from '#utils/error';
+import { handleAxiosError, handleDBInvalidValue, handleDBDuplicateFields, handleDBValidationError } from '#utils/error';
 
 export const formatError = (caughtError, req, res, next) => {
   console.log(caughtError);
