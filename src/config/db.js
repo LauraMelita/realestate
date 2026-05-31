@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
-import { logError } from '#services/logger';
+import { logSuccess, logError } from '#utils/logger';
 
-const connectDB = async () => {
-  const DB = process.env.DATABASE;
+const connectDB = async (context) => {
+  if (!context) throw new Error('connectDB requires a context');
 
   try {
-    await mongoose.connect(DB);
-    console.log('DB connection successful!');
+    await mongoose.connect(process.env.DATABASE);
+    logSuccess(`[${context}] DB connected`);
   } catch (error) {
-    logError('DB connection error', error.message);
+    logError(`[${context}] DB connection error`, error.message);
     process.exit(1); // Exit process with failure
   }
 };

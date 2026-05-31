@@ -62,8 +62,6 @@ export const buildPHPSearchUrl = (baseUrl, params = {}) => {
   return decodeURIComponent(fullUrl);
 };
 
-export const encodeObjectAsUrlParam = (obj) => encodeURIComponent(JSON.stringify(obj));
-
 // ============================================================
 // TIMING
 // ============================================================

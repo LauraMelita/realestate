@@ -1,6 +1,6 @@
 import Property from '#models/property';
-import { logError } from '#services/logger';
 import { generateHash } from '#utils/helpers';
+import { logError } from '#utils/logger';
 
 export const getAllProperties = async (req, res, next) => {
   try {
@@ -44,7 +44,7 @@ export const saveNewProperties = async (properties, agency) => {
     const insertedHashes = new Set(insertedProperties.map((property) => property.hash));
     const failedProperties = newProperties.filter((property) => !insertedHashes.has(property.hash));
 
-    logError(`Some properties failed to save for ${agency}`, {
+    logError(`[scheduler] [${agency}] Some properties failed to save`, {
       attempted: newProperties.length,
       inserted: insertedProperties.length,
       error: error.message,

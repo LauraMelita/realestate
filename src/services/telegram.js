@@ -1,6 +1,6 @@
 import bot from '#config/bot';
-import { logError } from '#services/logger';
 import { formatPrice, generateMapsUrl, sleep } from '#utils/helpers';
+import { logError } from '#utils/logger';
 
 const MESSAGE_DELAY = 500;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -29,9 +29,9 @@ export const sendNotification = async (data, { hasLinkPreview, agencyLabel }) =>
         await bot.sendPhoto(CHAT_ID, image, { caption: message, parse_mode: 'HTML' });
       }
     } catch (error) {
-      logError('Failed to send Telegram message', {
-        agency: property.agency,
+      logError(`[telegram] [${property.agency}] Failed to send message`, {
         sourceId: property.sourceId,
+        url: property.url,
         error: error.message,
       });
     } finally {

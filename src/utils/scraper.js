@@ -1,6 +1,5 @@
 import puppeteer from 'puppeteer';
 import { createUserAgent } from '#utils/helpers';
-import { logError } from '#services/logger';
 
 // ============================================================
 // PUPPETEER
@@ -33,9 +32,6 @@ export const usePuppeteer = async (url, nextPageSelector, scrapeFn) => {
     // Otherwise, scrape a single page and return the result
     await page.goto(url, { waitUntil: 'networkidle2' });
     return await scrapeFn(page);
-  } catch (error) {
-    logError('Error during Puppeteer scraping', error.message);
-    throw error;
   } finally {
     await browser.close();
   }
