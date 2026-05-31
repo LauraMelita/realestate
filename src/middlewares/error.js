@@ -2,7 +2,7 @@ import { isHttpError } from 'http-errors';
 import { isAxiosError } from 'axios';
 import { handleAxiosError, handleDBInvalidValue, handleDBDuplicateFields, handleDBValidationError } from '#utils/error';
 
-export const formatError = (caughtError, req, res, next) => {
+export const formatError = (caughtError, _req, _res, next) => {
   let error = caughtError;
   const { name, code } = caughtError;
 
@@ -14,7 +14,7 @@ export const formatError = (caughtError, req, res, next) => {
   next(error);
 };
 
-export const handleError = (error, req, res, next) => {
+export const handleError = (error, _req, res, _next) => {
   let statusCode = 500;
   let errorMessage = 'Oops, something went wrong. Please try again later.';
 
