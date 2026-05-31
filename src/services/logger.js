@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-
 import { humanDateTime } from '#utils/helpers';
 
 export const logScraperStart = (agency) => {
@@ -17,6 +16,8 @@ export const logSaved = (agency, count = 0) => {
   console.log(chalk.green(`${label} ${count} new properties saved`));
 };
 
-export const logError = (...args) => {
-  console.error(chalk.red(args.join(' ')));
+export const logError = (message, context = null) => {
+  console.error(chalk.red(message));
+
+  if (context) console.dir(context, { depth: null, colors: true });
 };

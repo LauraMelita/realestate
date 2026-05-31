@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 import { logError } from '#services/logger';
 
 const connectDB = async () => {
@@ -9,7 +8,7 @@ const connectDB = async () => {
     await mongoose.connect(DB);
     console.log('DB connection successful!');
   } catch (error) {
-    logError('DB connection error:', error);
+    logError('DB connection error', error.message);
     process.exit(1); // Exit process with failure
   }
 };
