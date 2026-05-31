@@ -5,6 +5,11 @@ export const payload = {
   propertytypes: 'apartment',
   towns: SEARCH_CONFIG.locations.map(({ postalCode, city }) => `${postalCode}-${city.toLowerCase()}`).join(','), // e.g. '1090-jette,1081-koekelberg'
   maxprice: SEARCH_CONFIG.maxPrice,
+  minbedrooms: SEARCH_CONFIG.minRooms,
   minlivablesurface: SEARCH_CONFIG.minSurface,
-  pageSize: 1000,
+  tags: '',
+  municipals: '',
+  provinces: '',
+  regions: '',
+  noIndex: 1,
 };
