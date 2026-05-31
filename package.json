@@ -25,6 +25,7 @@
     "server": "node --import=extensionless/register src/server.js",
     "scheduler": "node --import=extensionless/register src/scheduler.js",
     "dev": "run-p server scheduler",
+    "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
