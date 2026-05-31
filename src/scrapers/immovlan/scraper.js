@@ -1,9 +1,9 @@
 import axios from 'axios';
 import SEARCH_CONFIG from '#config/search';
 import IMMOVLAN_CONFIG from '#scrapers/immovlan/constants';
-import { createUserAgent } from '#utils/helpers';
 import { payload } from '#scrapers/immovlan/payload';
 import { formatData } from '#scrapers/immovlan/parser';
+import { createUserAgent } from '#utils/helpers';
 
 const filterResults = (data) =>
   data.filter((item) => {

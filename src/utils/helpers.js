@@ -76,22 +76,16 @@ export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const filterEmpty = (arr) =>
   arr.filter(
-    (item) =>
-      item !== null &&
-      item !== undefined &&
-      (typeof item !== 'object' || Object.keys(item).length > 0)
+    (item) => item !== null && item !== undefined && (typeof item !== 'object' || Object.keys(item).length > 0)
   );
 
-export const deduplicateByKey = (arr, key) =>
-  Array.from(new Map(arr.map((item) => [item[key], item])).values());
+export const deduplicateByKey = (arr, key) => Array.from(new Map(arr.map((item) => [item[key], item])).values());
 
 export const deduplicateByKeys = (arr, keys) =>
   Array.from(
     new Map(
       arr.map((item) => {
-        const compositeKey = keys
-          .map((key) => key.split('.').reduce((obj, prop) => obj?.[prop], item))
-          .join('|');
+        const compositeKey = keys.map((key) => key.split('.').reduce((obj, prop) => obj?.[prop], item)).join('|');
 
         return [compositeKey, item];
       })
