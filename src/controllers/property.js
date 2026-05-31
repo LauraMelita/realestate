@@ -1,5 +1,5 @@
 import Property from '#models/property';
-
+import { logError } from '#services/logger';
 import { generateHash } from '#utils/helpers';
 
 export const getAllProperties = async (req, res, next) => {
@@ -31,6 +31,29 @@ export const saveNewProperties = async (properties, agency) => {
   const existingHashes = new Set(existing.map((property) => property.hash));
   const newProperties = enriched.filter((property) => !existingHashes.has(property.hash));
 
+  if (!newProperties.length) return [];
+
   // Insert new properties
-  return newProperties.length ? await Property.insertMany(newProperties) : [];
+  try {
+    return await Property.insertMany(newProperties, {
+      ordered: false,
+      throwOnValidationError: true,
+    });
+  } catch (error) {
+    const insertedProperties = error.insertedDocs ?? error.results?.filter((result) => result?.isNew === false) ?? [];
+    const insertedHashes = new Set(insertedProperties.map((property) => property.hash));
+    const failedProperties = newProperties.filter((property) => !insertedHashes.has(property.hash));
+
+    logError(`Some properties failed to save for ${agency}`, {
+      attempted: newProperties.length,
+      inserted: insertedProperties.length,
+      error: error.message,
+      failed: {
+        total: failedProperties.length,
+        properties: failedProperties.map(({ sourceId, url }) => ({ sourceId, url })),
+      },
+    });
+
+    return insertedProperties;
+  }
 };

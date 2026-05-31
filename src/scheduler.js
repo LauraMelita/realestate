@@ -15,11 +15,9 @@ const scheduler = () => {
         const newProperties = await saveNewProperties(data, name);
         logSaved(name, newProperties.length);
 
-        if (newProperties.length) {
-          await sendNotification(newProperties, { hasLinkPreview, agencyLabel: label });
-        }
+        if (newProperties.length) await sendNotification(newProperties, { hasLinkPreview, agencyLabel: label });
       } catch (error) {
-        logError(`Error running scraper for ${name}:`, error.message);
+        logError(`Error running scraper for ${name}`, error.message);
       }
     });
   });
