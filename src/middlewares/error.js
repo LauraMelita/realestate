@@ -3,8 +3,6 @@ import { isAxiosError } from 'axios';
 import { handleAxiosError, handleDBInvalidValue, handleDBDuplicateFields, handleDBValidationError } from '#utils/error';
 
 export const formatError = (caughtError, req, res, next) => {
-  console.log(caughtError);
-
   let error = caughtError;
   const { name, code } = caughtError;
 

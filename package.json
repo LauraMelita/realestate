@@ -13,6 +13,7 @@
     "#scheduler": "./src/scheduler.js",
     "#config/*": "./src/config/*.js",
     "#controllers/*": "./src/controllers/*.js",
+    "#jobs/*": "./src/jobs/*.js",
     "#middlewares/*": "./src/middlewares/*.js",
     "#models/*": "./src/models/*.js",
     "#routes/*": "./src/routes/*.js",
@@ -21,8 +22,9 @@
     "#utils/*": "./src/utils/*.js"
   },
   "scripts": {
-    "start": "node --import=extensionless/register src/server.js",
-    "dev": "nodemon --exec node --import=extensionless/register src/server.js",
+    "server": "node --import=extensionless/register src/server.js",
+    "scheduler": "node --import=extensionless/register src/scheduler.js",
+    "dev": "run-p server scheduler",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -49,6 +51,7 @@
   "devDependencies": {
     "eslint": "^10.3.0",
     "nodemon": "^3.1.14",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.8.3"
   }
 }

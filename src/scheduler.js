@@ -1,26 +1,31 @@
+import 'dotenv/config';
 import cron from 'node-cron';
+import connectDB from '#config/db';
 import AGENCIES from '#config/agencies';
-import { logScraperStart, logSaved, logError } from '#services/logger';
-import { saveNewProperties } from '#controllers/property';
-import { sendNotification } from '#services/telegram';
+import { runScraper } from '#jobs/runScraper';
+import { logSuccess, logError } from '#utils/logger';
 
-const scheduler = () => {
-  AGENCIES.forEach(({ name, label, method: scraper, enabled, frequency, hasLinkPreview }) => {
-    if (!enabled) return;
+const startScheduler = async () => {
+  try {
+    await connectDB('scheduler');
 
-    cron.schedule(frequency, async () => {
-      try {
-        logScraperStart(name);
-        const data = await scraper();
-        const newProperties = await saveNewProperties(data, name);
-        logSaved(name, newProperties.length);
+    AGENCIES.forEach((agency) => {
+      if (!agency.enabled) return;
 
-        if (newProperties.length) await sendNotification(newProperties, { hasLinkPreview, agencyLabel: label });
-      } catch (error) {
-        logError(`Error running scraper for ${name}`, error.message);
-      }
+      cron.schedule(agency.frequency, async () => {
+        try {
+          await runScraper(agency);
+        } catch (error) {
+          logError(`[scheduler] [${agency.name}] Failed to run scraper`, error.message);
+        }
+      });
     });
-  });
+
+    logSuccess('[scheduler] Running cron jobs');
+  } catch (error) {
+    logError('[scheduler] Failed to start', error.message);
+    process.exit(1);
+  }
 };
 
-export default scheduler;
+startScheduler();
