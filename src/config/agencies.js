@@ -27,7 +27,7 @@ const AGENCIES = [
     hasLinkPreview: true,
   },
   {
-    name: 'expertissimo',
+    name: 'expertissimmo',
     label: 'Expertissimmo',
     method: scrapeExpertissimmo,
     enabled: true,
