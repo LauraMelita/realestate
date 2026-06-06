@@ -7,7 +7,7 @@ on:
 
 jobs:
   scrape:
-    if: vars.ENABLE_REALO_SCRAPER == 'true'
+    if: ${{ vars.ENABLE_REALO_SCRAPER == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 2
 
