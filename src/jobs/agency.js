@@ -4,7 +4,7 @@ import { humanDateTime } from '#utils/helpers';
 import { logInfo, logSuccess, logWarning } from '#utils/logger';
 
 const processAgency = async (context, { name, label, method: scrape, hasLinkPreview }) => {
-  logWarning(`[${context}] [${name}] Running scrape at ${humanDateTime()}`);
+  logWarning(`[${context}] [${name}] Running scraper at ${humanDateTime()}`);
 
   const data = await scrape();
   const newProperties = await saveNewProperties(data, name);
