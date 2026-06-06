@@ -44,7 +44,7 @@ export const saveNewProperties = async (properties, agency) => {
     const insertedHashes = new Set(insertedProperties.map((property) => property.hash));
     const failedProperties = newProperties.filter((property) => !insertedHashes.has(property.hash));
 
-    logError(`[scheduler] [${agency}] Some properties failed to save`, {
+    logError('Failed to save some properties', {
       attempted: newProperties.length,
       inserted: insertedProperties.length,
       error: error.message,

@@ -3,19 +3,21 @@ import { saveNewProperties } from '#controllers/property';
 import { humanDateTime } from '#utils/helpers';
 import { logInfo, logSuccess, logWarning } from '#utils/logger';
 
-export const runScraper = async ({ name, label, method: scraper, hasLinkPreview }) => {
-  logWarning(`[scheduler] [${name}] Running scraper at ${humanDateTime()}`);
+const processAgency = async (context, { name, label, method: scrape, hasLinkPreview }) => {
+  logWarning(`[${context}] [${name}] Running scrape at ${humanDateTime()}`);
 
-  const data = await scraper();
+  const data = await scrape();
   const newProperties = await saveNewProperties(data, name);
 
   if (!newProperties.length) {
-    logInfo(`[scheduler] [${name}] No new properties found`);
+    logInfo(`[${context}] [${name}] No new properties found`);
   } else {
-    logSuccess(`[scheduler] [${name}] ${newProperties.length} new properties saved`);
+    logSuccess(`[${context}] [${name}] ${newProperties.length} new properties saved`);
   }
 
   if (newProperties.length) await sendNotification(newProperties, { hasLinkPreview, agencyLabel: label });
 
   return newProperties;
 };
+
+export default processAgency;
