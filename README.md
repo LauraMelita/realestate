@@ -158,8 +158,8 @@ TELEGRAM_CHAT_ID=123456789
 
    Go to **Settings → Secrets and variables → Actions → Variables**.
 
-   > [!NOTE]
-   > Set a variable to `false` to disable the corresponding scraper workflow.
+> [!NOTE]
+> Set a variable to `false` to disable the corresponding scraper workflow.
 
    ```env
    ENABLE_CENTURY_SCRAPER=true
@@ -190,8 +190,6 @@ npm run dev
 ```
 
 ### Run a single scraper
-
-Example:
 
 ```bash
 npm run scraper century
