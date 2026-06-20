@@ -9,7 +9,7 @@ const SEARCH_CONFIG = {
   ],
   maxPrice: 350000,
   minRooms: 2,
-  minSurface: 95,
+  minSurface: 90,
   features: ['garden', 'terrace'],
 };
 

@@ -1,40 +1,46 @@
+import axios from 'axios';
 import SEARCH_CONFIG from '#config/search';
 import MYIMMO_CONFIG from '#scrapers/myimmo/constants';
-import { endpoint } from '#scrapers/myimmo/endpoint';
+import { params } from '#scrapers/myimmo/params';
 import { formatData } from '#scrapers/myimmo/parser';
-import { usePuppeteer } from '#utils/scraper';
+import { createUserAgent } from '#utils/helpers';
 
-const getSurfaceValue = (surface) => Number(surface?.replace(',', '.').match(/[\d.]+/)?.[0] || 0);
+const fetchPage = async (page) => {
+  const payload = { ...params, pages: page };
 
-const extractPageData = async (page) => {
-  await page.waitForSelector(MYIMMO_CONFIG.selectors.card);
+  const { data } = await axios.post(MYIMMO_CONFIG.apiUrl, payload, {
+    headers: {
+      'Content-Type': 'application/json',
+      'User-Agent': createUserAgent(),
+    },
+  });
 
-  const rawData = await page.$$eval(
-    MYIMMO_CONFIG.selectors.card,
-    (items, selectors) =>
-      items.map((item) => {
-        const link = item.querySelector(selectors.link)?.href;
-        const price = item.querySelector(selectors.price)?.innerText;
-        const peb = item.querySelector(selectors.peb)?.src;
-        const status = item.querySelector(selectors.status)?.innerText;
-        const surface = item.querySelector(selectors.surface)?.innerText;
-        const bedrooms = item.querySelector(selectors.bedrooms)?.innerText;
-        const address = item.querySelector(selectors.address)?.innerText;
-        const image = item.querySelector(selectors.image)?.src;
-
-        return { link, price, peb, status, surface, bedrooms, address, image };
-      }),
-    MYIMMO_CONFIG.selectors
-  );
-
-  return rawData
-    .filter((item) => item.address?.trim()) // Filter out listings with empty addresses
-    .filter((item) => getSurfaceValue(item.surface) >= SEARCH_CONFIG.minSurface) // Filter out listings below minimum surface
-    .filter((item) => !['vendu', 'option'].includes(item.status?.toLowerCase())); // Filter out unavailable listings
+  return data;
 };
 
-export const scrapeMyimmo = async () => {
-  const data = await usePuppeteer(endpoint, MYIMMO_CONFIG.selectors.nextPage, extractPageData);
+const filterResults = (data) =>
+  data.filter((item) => {
+    const matchesSurfaceFilter = item.area >= SEARCH_CONFIG.minSurface;
 
-  return formatData(data || []);
+    const matchesFeatureFilter =
+      !SEARCH_CONFIG.features.length || SEARCH_CONFIG.features.some((feature) => !!item[feature]);
+
+    return matchesSurfaceFilter && matchesFeatureFilter;
+  });
+
+export const scrapeMyimmo = async () => {
+  const firstPage = await fetchPage(1);
+  const totalPages = firstPage.totalPages || 1;
+
+  const rawData = [...(firstPage.data?.estates || [])];
+
+  for (let page = 2; page <= totalPages; page++) {
+    const data = await fetchPage(page);
+
+    rawData.push(...(data.data?.estates || []));
+  }
+
+  const refinedData = filterResults(rawData);
+
+  return formatData(refinedData);
 };

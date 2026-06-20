@@ -1,51 +1,29 @@
+import MYIMMO_CONFIG from '#scrapers/myimmo/constants';
 import { getCityFromPostalCode } from '#utils/helpers';
 
-const getId = (link) => {
-  const match = link?.match(/ref(\d+)/);
+const buildAddress = (street, number) => {
+  if (!street) return null;
 
-  return match ? match[1] : null;
-};
+  const formattedStreet = street.trim();
 
-const formatPrice = (price) => parseInt(price?.replace(/[^\d]/g, ''), 10) || null;
-
-const formatPeb = (pebUrl) => {
-  const pebMatch = pebUrl?.match(/peb_([a-g][+-]?)/i);
-
-  return pebMatch ? pebMatch[1].toUpperCase() : null;
-};
-
-const formatAddress = (address) => {
-  const [street = '', addressParts = ''] = address?.split('\n') || [];
-  const [postalCode] = addressParts.trim().split(' ');
-
-  return {
-    street: street.trim() || null,
-    postalCode: postalCode || null,
-    city: getCityFromPostalCode(postalCode),
-  };
-};
-
-const formatSurface = (surface) => {
-  return Number(surface?.replace(',', '.').match(/[\d.]+/)?.[0] || 0);
+  return number ? `${formattedStreet} ${number}` : formattedStreet;
 };
 
 export const formatData = (rawData) =>
-  rawData.map(({ image, price, peb, address, surface, bedrooms, link }) => {
-    const { street, postalCode, city } = formatAddress(address);
-
+  rawData.map(({ id, pictures, price, energyClass, zip, address, number, area, rooms, terrace, garden }) => {
     return {
-      sourceId: getId(link),
+      sourceId: id,
       type: 'apartment',
-      image,
-      price: formatPrice(price),
-      peb: formatPeb(peb),
-      zip: postalCode,
-      city,
-      address: street,
-      surface: formatSurface(surface),
-      bedrooms,
-      terrace: null,
-      garden: null,
-      url: link,
+      image: pictures?.[0]?.urlLarge,
+      price,
+      peb: energyClass ?? null,
+      zip,
+      city: getCityFromPostalCode(zip),
+      address: buildAddress(address, number),
+      surface: area,
+      bedrooms: rooms,
+      terrace: !!terrace,
+      garden: !!garden,
+      url: `${MYIMMO_CONFIG.baseUrl}/properties/${id}`,
     };
   });
