@@ -154,7 +154,7 @@ TELEGRAM_CHAT_ID=123456789
    TELEGRAM_CHAT_ID=123456789
    ```
 
-2. Add repository variables to enable scrapers.
+2. Add repository variables to enable scrapers
 
    Go to **Settings → Secrets and variables → Actions → Variables**.
 
